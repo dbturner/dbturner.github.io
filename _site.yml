@@ -1,0 +1,10 @@
+name: "Daniel B. Turner"
+navbar:
+  title: "Dan Turner"
+  left:
+    - text: "Home"
+      href: index.html
+output:
+  html_document:
+    theme: paper
+    css: styles.css
