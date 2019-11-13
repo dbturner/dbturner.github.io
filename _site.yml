@@ -1,0 +1,9 @@
+name: "dans-website"
+output_dir: "."
+navbar:
+  title: "Dans Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Research"
+      href: research.html
