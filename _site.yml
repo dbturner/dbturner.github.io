@@ -7,3 +7,5 @@ navbar:
       href: index.html
     - text: "Research"
       href: research.html
+    - text: "Publications"
+      href: publications.html
