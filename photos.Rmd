@@ -44,16 +44,6 @@
 
 ***********************************************************************************
 
-### [HerbVar](https://wetzellab.com/herbvar/) in Peru
-![](~/GitHub/dbturner.github.io/pics/solanaceaeHerbvar2019.jpg) 
-<br />
-<br />
-
-<br />
-<br />
-
-***********************************************************************************
-
 ### Urban ecology: 
 <div class="vscroll-plot">
 ![](~/GitHub/dbturner.github.io/pics/farm512017.jpg)
