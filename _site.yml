@@ -9,3 +9,6 @@ navbar:
       href: research.html
     - text: "Publications"
       href: publications.html
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
