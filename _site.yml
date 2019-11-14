@@ -10,5 +10,6 @@ navbar:
     - text: "Publications"
       href: publications.html
 output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
+  html_document:
+    theme: flatly
+    css: style.css
