@@ -10,5 +10,5 @@ navbar:
     - text: "Publications"
       href: publications.html
 output:
-  html_document:
-    theme: flatly
+  rmarkdown::html_document:
+    theme: yeti
