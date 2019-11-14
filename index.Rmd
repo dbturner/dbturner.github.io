@@ -1,7 +1,7 @@
 <style>
 .column-left{
   float: left;
-  width: 46%;
+  width: 52%;
   text-align: left;
 }
 .column-center{
@@ -16,13 +16,28 @@
 }
 </style>
 
+<style>
+.vscroll-plot {
+    width: 400px;
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+</style>
+
+
+<br />
 <br />
 
 <div class="column-left">
-### I am a community ecologist studying how biogeographic variation, temporal dynamics, and genetic diversity influence interactions between plants and insects. As a PhD student in [Will Wetzel's Lab](https://wetzellab.com/) in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I use meta-analysis methods, field and greenhouse experiments, and observational studies to understand how plant diversity across scales affects insect community diversity. I also develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills they typically use for data analysis and publication.
+## **About me:**
+### I am a community ecologist studying how biogeographic variation, temporal dynamics, and genetic diversity influence interactions between plants and insects. As a PhD student in [Will Wetzel's Lab](https://wetzellab.com/) in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I use meta-analysis methods, field and greenhouse experiments, and observational studies to understand how plant diversity across scales affects insect community diversity. I also develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills typically used for data analysis and publication.
+<br />
 
-Want to know more about what I've done in the past? Check out my [CV](~/GitHub/dbturner.github.io/cv/Turner_CV_November_2019_github.pdf)!
+#### Want to know more about what I've done in the past? Check out my [CV](https://github.com/dbturner/dbturner.github.io/blob/master/cv/Turner_CV_November_2019_github.pdf)!
+
 </div>
+<br />
 <br />
 
 <div class="column-right">
@@ -31,6 +46,6 @@ knitr::include_graphics("~/GitHub/dbturner.github.io/pics/homePic_14November2019
 ```
 <br />
 
-[![google scholar](~/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)    [![twitter](~/GitHub/dbturner.github.io/pics/twitterLogo.png){#id .class width=17% height=25%}](https://twitter.com/danbtweeter)    [![github](~/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
+[![google scholar](~/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)      [![twitter](~/GitHub/dbturner.github.io/pics/twitterLogo.png){#id .class width=17% height=25%}](https://twitter.com/danbtweeter)      [![github](~/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
 
 </div>
