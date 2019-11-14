@@ -1,6 +1,18 @@
----
-title: "Dan Turner"
----
-## Plant and insect community ecology
-I use blah blah blah to do blah blah blah.
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
+</style>
 
+<div class="col2">
+#### I'm a community ecologist studying how biogeographic, temporal, and genetic diversity influence interactions between plants and insects. 
+
+#### Here is a photo of me!
+</div>
