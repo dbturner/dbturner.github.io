@@ -38,7 +38,11 @@ title: Home
 ### I am a quantitative community ecologist studying how biogeographic variation, temporal dynamics, and genetic diversity influence interactions between plants and insects. As a PhD student in [Will Wetzel's Lab](https://wetzellab.com/) in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I employ meta-analysis methods, field experiments, and statistical methods development to understand how diversity across temporal scales affect ecology. 
 
 <br />
-### I believe we need open data and transparent analyses to advance science. However, science cannot progress in a bubble, and open science must include stakeholders not historically included in the scientific process. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. These tools, called _c4bi (Coding for broader impact)_, are created in collaboration with Drs. Matthew Helmus and Jocelyn Behm at Temple University. Please reach out if you would like to collaborate on future efforts to spread the joys of data visualization and analysis beyond traditional scientific publications.
+<br />
+
+### I believe we need open data and transparent analyses to advance science. However, science cannot progress in a bubble, and open science must include stakeholders not historically included in the scientific process. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. These tools, called [_c4bi (Coding for broader impact)_](https://github.com/dbturner/c4bi), are created in collaboration with [Drs. Matthew Helmus and Jocelyn Behm at Temple University](https://www.iecolab.org/). Please reach out if you would like to collaborate on future efforts to spread the joys of data visualization and analysis beyond traditional scientific publications.
+
+<br />
 <br />
 
 #### Want to know more about what I've done in the past? Check out my [CV](https://github.com/dbturner/dbturner.github.io/blob/master/cv/Turner_CV.pdf)!
