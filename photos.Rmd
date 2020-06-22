@@ -36,10 +36,14 @@ title: Photos
 ### Goldenrod temporal ecology project
 <div class="vscroll-plot">
 <br />
-![](~/GitHub/dbturner.github.io/pics/herbivorycages2019.jpg)
+![](~/Documents/GitHub/dbturner.github.io/pics/herbivorycages2019.jpg)
 <br />
 <br />
-![](~/GitHub/dbturner.github.io/pics/goldenrodgarden2019.jpg)
+![](~/Documents/GitHub/dbturner.github.io/pics/goldenrodgarden2019.jpg)
+<br />
+<br />
+![](~/Documents/GitHub/dbturner.github.io/pics/plant_comm_june2020.jpg)
+
 <br />
 <br />
 </div>
@@ -50,10 +54,10 @@ title: Photos
 
 ### Urban ecology: 
 <div class="vscroll-plot">
-![](~/GitHub/dbturner.github.io/pics/farm512017.jpg)
+![](~/Documents/GitHub/dbturner.github.io/pics/farm512017.jpg)
 <br />
 <br />
-![](~/GitHub/dbturner.github.io/pics/finquita2017.jpg)
+![](~/Documents/GitHub/dbturner.github.io/pics/finquita2017.jpg)
 <br />
 <br />
 </div>

@@ -39,7 +39,11 @@ title: Home
 
 <br />
 
-#### I believe we need open data and transparent analyses to advance science. However, science cannot progress in a bubble, and open science must include stakeholders not historically included in the scientific process. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. These tools, called [_c4bi (Coding for broader impact)_](https://github.com/dbturner/c4bi), are created in collaboration with [Drs. Matthew Helmus and Jocelyn Behm at Temple University](https://www.iecolab.org/). Please reach out if you would like to collaborate on future efforts to spread the joys of data visualization and analysis beyond traditional scientific publications.
+#### In the past, I researched Hispaniolan frog and toad phylogenetics and urban ecosystem serices in the Philadelphia region. Presently, I study plant-herbivore temporal dynamics in the model tall goldenrod (_Solidago altissima_) system in southwestern Michigan. In 2021, I will study tropical plant-herbivore interactions in urban landscapes and rupestrian grasslands as a Fulbright researcher with Dr. Tatiana Cornelissen's lab at the Universidade Federal de Minas Gerais, Belo Horizonte, Brazil.
+
+<br />
+
+#### We need open data and transparent analyses to advance science. However, science cannot progress in a bubble, and "open" science must include stakeholders not historically included in the scientific process. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. These tools, called [_c4bi (Coding for broader impact)_](https://github.com/dbturner/c4bi), are created in collaboration with [Drs. Matthew Helmus and Jocelyn Behm at Temple University](https://www.iecolab.org/). Please reach out if you would like to collaborate on future efforts to spread the joys of data visualization and analysis beyond traditional scientific publications.
 
 <br />
 
