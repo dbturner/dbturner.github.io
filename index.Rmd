@@ -42,10 +42,10 @@
 
 <div class="column-right">
 ```{r, echo = FALSE, out.width = "280px"}
-knitr::include_graphics("~/GitHub/dbturner.github.io/pics/homePic_14November2019.jpg")
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homePic_14November2019.jpg")
 ```
 <br />
 
-[![google scholar](~/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)      [![twitter](~/GitHub/dbturner.github.io/pics/twitterLogo.png){#id .class width=17% height=25%}](https://twitter.com/danbtweeter)      [![github](~/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
+[![google scholar](~/Documents/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)      [![twitter](~/Documents/GitHub/dbturner.github.io/pics/twitterLogo.png){#id .class width=17% height=25%}](https://twitter.com/danbtweeter)      [![github](~/Documents/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
 
 </div>
