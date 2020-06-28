@@ -11,6 +11,11 @@ navbar:
       href: publications.html
     - text: "Photos"
       href: photos.html
+
 output:
   rmarkdown::html_document:
     theme: flatly
+    
+template:
+  params:
+    ganalytics: UA-171127410-1
