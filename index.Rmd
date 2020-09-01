@@ -47,7 +47,7 @@ title: Home
 
 <br />
 
-#### Want to know more about what I've done in the past? Check out my [CV](https://github.com/dbturner/dbturner.github.io/blob/master/cv/Turner_CV.pdf)!
+#### Want to know more about what I've done in the past? Check out my [CV](https://dbturner.github.io/cv/cv.html)!
 
 </div>
 <br />
