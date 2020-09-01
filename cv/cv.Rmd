@@ -55,7 +55,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 
 
 ```{r}
-cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/dbturner/dbturner.github.io/tree/master/cv)")
+cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://dbturner.github.io/cv/cv.pdf)")
 ```
 
 Contact {#contact}
@@ -134,10 +134,15 @@ CV %<>% print_section('software')
 Research Experience {data-icon=laptop}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+CV %<>% print_text_block('research_experience_aside')
+```
+:::
+
 ```{r}
 CV %<>% print_section('research_positions')
 ```
-
 
 
 Teaching Experience {data-icon=chalkboard-teacher}
