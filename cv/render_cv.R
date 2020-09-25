@@ -18,5 +18,5 @@ rmarkdown::render("cv.rmd",
 
 # Convert to PDF using Pagedown
 # if trouble getting the pdf to print the right html - then write an absolute path for cv.html
-pagedown::chrome_print(input = "cv.html",
-                       output = "cv.pdf")
+pagedown::chrome_print(input = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/cv.html",
+                       output = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/cv.pdf")
