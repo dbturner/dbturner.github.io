@@ -2,8 +2,6 @@
 title: Photos
 ---
 
-<br />
-<br />
 <style>
 .column-left{
   float: left;
@@ -27,11 +25,12 @@ title: Photos
     overflow-x: hidden;
 }
 </style>
+***********************************************************************************
 
 <center>
-## **Fieldwork fun pics with the plants and insects (more to come!):**
+## _Fieldwork pictures with the plants and insects:_
 
-***********************************************************************************
+<br />  
 
 ### Goldenrod temporal ecology project
 <div class="vscroll-plot">

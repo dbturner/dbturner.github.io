@@ -1,47 +1,61 @@
 ---
-title: Research
+title: Research Projects
 ---
 
-<br />
-<br />
 <style>
 .column-left{
   float: left;
-  width: 62%;
+  width: 63%;
   text-align: left;
 }
 .column-right{
   float: right;
-  width: 30%;
+  width: 35%;
   text-align: center;
 }
 </style>
 
-
-# **Projects**
-<br />
-
-***********************************************************************************
+***********************************************************************************  
 <div class="column-left">
-## How do insect communities assemble on non-native plants?
+## _How do insect communities assemble on non-native plants?_
 <br />
 
-#### Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species distributed across two or more continents, I am performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant's native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.
-<br />
-<br />
-
-***********************************************************************************
-## How does ontogenetic variation in plant populations affect plant-insect interactions?
-<br />
-
-#### Intraspecific diversity in plant populations has positive effects on insect community diversity. Ontogenetic traits, like the regulation of plant defense, growth, and reproduction, may be a mechanism for the maintenance of diversity in insect communities, yet we have not fully integrated temporal ecology into intraspecific diversity experiments. Using common garden and greenhouse experiments with tall goldenrod (_Solidago altissima_) at [Kellogg Biological Station](http://www.kbs.msu.edu/), I manipulate combinations of genotypes with varying ontogenetic trajectories to observe how interactions varying across goldenrod genotypes over time. Incorporating often-overlooked within-season temporal variation explains the patterns that we have observed at a single point in time or as an average across the growing season.
+#### Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant's native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.
 <br />
 <br />
 
-***********************************************************************************
-## How do we harness field biologists' quantitative skills for public communication?
+***********************************************************************************  
+<br />  
 
-#### While public communication advances conservation and educational goals within and outside the scientific community, we have not formally developed many tools to help guide these exchanges. In collaboration with Drs. Jocelyn Behm and Matthew Helmus from the [Integrative Ecology Lab](https://www.iecolab.org/) at Temple University, I work to develop and disseminate public communication tools that harness the quantitative skills that field biologists, like ecologists and evolutionary biologists, learn in their training and careers. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. We are publishing this work and code as an article soon!
+## _How does ontogenetic variation in plant populations affect plant-insect interactions?_
+<br />
+
+#### Intraspecific diversity in plant populations has positive effects on insect community diversity. Ontogenetic traits, like the regulation of plant defense, growth, and reproduction, may be a mechanism for the maintenance of diversity in insect communities, yet we have not fully integrated temporal ecology into intraspecific diversity experiments. Using common garden and greenhouse experiments with tall goldenrod (_Solidago altissima_) at [Kellogg Biological Station](http://www.kbs.msu.edu/), I manipulate combinations of genotypes with varying ontogenetic trajectories to observe how interactions varying across goldenrod genotypes over time. Incorporating often overlooked within-season temporal variation explains the patterns that we have observed at a single point in time or as an average across the growing season.
+<br />
+<br />
+
+***********************************************************************************  
+<br />  
+
+## _How do we leverage field biologists' quantitative skills for effective public communication?_
+<br />
+
+#### While effective public communication advances conservation and educational goals within and outside the scientific community, we have not formally integrated all communication tools available to us. In collaboration with Drs. Jocelyn Behm and Matthew Helmus from the [Integrative Ecology Lab](https://www.iecolab.org/) at Temple University, I work to develop and share data communication tools to leverage the quantitative skills that field biologists like ecologists learn in their professional training. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. We are publishing this work and code as an article soon. If you'd like to see our the package repository and tutorial in the meantime, check out the `c4bi` (Coding for broader impact) website [here](https://dbturner.github.io/c4bi)!
+
+<br />
+<br />
+
+***********************************************************************************  
+<br />  
+
+## _Why do plants have so many terpene compounds?_
+<br />
+
+#### With the advance of large-scale phytochemical datasets, ecologists, evolutionary biologists, and biochemists now have the unique opportunity synthesize individual results into broader patterns about the diversity, abundance, temporal and spatial variation, and evolution of phytochemicals across the plant tree of life. At least three major logistical constraints prevent the scientific community from understanding general patterns in the ecological relevance and evolution of plant secondary metabolites: (1) the reference of scale (e.g., individual, population, species; $\alpha$-, $\beta$-, $\gamma$-diversity); (2) the relationship between phytochemical diversity and abundance; and (3) methodological variation in phytochemical extraction and analysis. A tractable class of secondary metabolites—_terpenes_—presents the opportunity to relate these data to answer broad questions regarding scale, phytochemical diversity-abundance relationships, and methodological heterogeneity. In this project, I am creating a large relational database to answer key hypotheses about the origins and effects of terpene diversity and how this  diversity varies across scales.
+<br />
+<br />
+
+
 </div>
 
 <div class="column-right">
@@ -53,6 +67,9 @@ title: Research
 <br />
 <br />
 <br />
+```{r, echo = FALSE, out.width = "800px"}
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/invPlant.png")
+```
 <br />
 <br />
 <br />
@@ -78,6 +95,8 @@ knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/solidagoProj
 <br />
 <br />
 <br />
+<br />
+<br />  
 <br />
 <br />
 <br />

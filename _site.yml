@@ -1,7 +1,7 @@
 name: "dans-website"
 output_dir: "."
 navbar:
-  title: "Daniel B. Turner"
+  title: "Dan Turner"
   right:
     - text: "Home"
       href: index.html
@@ -14,7 +14,7 @@ navbar:
 
 output:
   rmarkdown::html_document:
-    theme: flatly
+    theme: sandstone
     
 template:
   params:
