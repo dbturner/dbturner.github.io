@@ -63,7 +63,7 @@ knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homePic_14No
 ```
 <br />
 
-[![google scholar](~/Documents/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)      [![twitter](~/Documents/GitHub/dbturner.github.io/pics/twitterLogo.png){#id .class width=17% height=25%}](https://twitter.com/danbtweeter)      [![github](~/Documents/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
+[![google scholar](~/Documents/GitHub/dbturner.github.io/pics/googlescholarLogo.png){#id .class width=14% height=21%}](https://scholar.google.com/citations?hl=en&user=K5aIPOwAAAAJ)        [![github](~/Documents/GitHub/dbturner.github.io/pics/githubLogo.png){#id .class width=14% height=21%}](https://github.com/dbturner)    
 
 #### Contact: turne400 (at) msu.edu
 </div>
