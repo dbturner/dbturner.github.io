@@ -1,0 +1,152 @@
+---
+title: "Daniel B. Turner's Resume"
+author: Daniel B. Turner
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: true
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+# long term issue: working directory has to be set to "Users/danielturner"
+
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+source("cv_printing_functions.r")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1oqYu7eeIKErJ7el2XcTxBmYwjx-CSI6u0XPyWBzTCMw/edit?usp=sharing",  
+  pdf_mode = params$pdf_mode
+)
+
+```
+
+
+```{r, eval = FALSE}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+```{r}
+# Build interactive network of positions colored by section
+# and connected if they occurred in the same year
+datadrivencv::build_network_logo(CV$entries_data)
+```
+
+
+```{r}
+cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://dbturner.github.io/cv/cv.pdf)")
+```
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_contact_info()
+```
+
+
+
+Coding Skills {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_skill_bars()
+```
+
+
+Languages {#language}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_language_bars()
+```
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made with the R package [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](http://nickstrayer.me/datadrivencv/index.html). 
+
+The source code is available [on github.com/dbturner/cv](https://github.com/dbturner/dbturner.github.io/tree/master/cv).
+
+Last updated on `r Sys.Date()`.
+
+
+
+Main
+================================================================================
+
+Daniel B. Turner {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+# Note the special double pipe so we modify the CV object in place
+CV %<>% print_text_block("intro") 
+```
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+
+Software Development  {data-icon=desktop}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('software') 
+```
+
+
+
+Publications  {data-icon=book}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('publications') 
+```
+  
+  
+
+Teaching Experience {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+
+```{r}
+CV %<>% print_section('teaching_positions')
+```
+<br>
+<br>
+
+
+
+
+```{r}
+CV %<>% print_links()
+```
+
+
+
