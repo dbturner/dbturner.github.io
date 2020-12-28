@@ -14,8 +14,7 @@ navbar:
 
 output:
   rmarkdown::html_document:
+    includes:
+       in_header: google_analytics.html
     theme: sandstone
-    
-template:
-  params:
-    ganalytics: UA-171127410-1
+
