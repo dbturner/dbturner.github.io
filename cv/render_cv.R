@@ -24,9 +24,9 @@ pagedown::chrome_print(input = "/Users/danielturner/Documents/GitHub/dbturner.gi
 
 
 # Knit the HTML version of abridged resume
-rmarkdown::render(here("/cv/resume.Rmd"),
+rmarkdown::render(here("/cv/cv.Rmd"),
                   params = list(pdf_mode = FALSE),
-                  output_file = "resume.html")
+                  output_file = "cv.html")
 
-pagedown::chrome_print(input = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/resume.html",
-                       output = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/resume.pdf")
+pagedown::chrome_print(input = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/cv.html",
+                       output = "/Users/danielturner/Documents/GitHub/dbturner.github.io/cv/cv.pdf")

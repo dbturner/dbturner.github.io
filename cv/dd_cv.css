@@ -70,6 +70,11 @@ sup {
   margin-left: -1px;
 }
 
+/* Users sign icon isn't centered by default which is lame */
+.fa-users {
+  margin-left: -1px;
+}
+
 /* When we have links at bottom in a list make sure they actually are numbered */
 #links li {
   list-style-type: decimal;
