@@ -4,8 +4,8 @@ title: Publications
 
 ***********************************************************************************  
 
-### **Turner, D.B.**, Behm, J.B., Phillips, P., Ramirez, V., & M.R. Helmus. Coding for broader impact: Leveraging field biologists’ programming skills for effective stakeholder communication. _Submitted_  
+#### **Turner, D.B.**, Behm, J.B., Phillips, P., Ramirez, V., & M.R. Helmus. Coding for broader impact: Leveraging coding skills for effective stakeholder communication. _Submitted_  
 
 
-### Landestoy, M.A., **Turner, D.B.**, Marion, A.B. & S.B. Hedges. (2018). A new species of Caribbean toad (Bufonidae, Peltophryne) from southern Hispaniola. _Zootaxa_. 4403(_3_): 523-539.  [PDF](https://dbturner.github.io/papers/landestoyetal2018.pdf)
+#### Landestoy, M.A., **Turner, D.B.**, Marion, A.B. & S.B. Hedges. (2018). A new species of Caribbean toad (Bufonidae, Peltophryne) from southern Hispaniola. _Zootaxa_. 4403(_3_): 523-539.  [PDF](https://dbturner.github.io/papers/landestoyetal2018.pdf)
 
