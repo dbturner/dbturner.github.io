@@ -1,0 +1,582 @@
+---
+output: 
+  html_document:
+    theme: sandstone
+---
+
+<style type="text/css">
+
+body, td {
+   font-size: 18px;
+}
+code.r{
+  font-size: 12px;
+}
+pre {
+  font-size: 11px
+}
+</style>
+
+<style>
+.column-left{
+  float: left;
+  width: 70%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 28%;
+  text-align: center;
+}
+</style>
+
+```{css, echo=FALSE}
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+pre[class] {
+  max-height: 200px;
+}
+```
+
+# Grad School Musical:
+## Natural Language Processing and my Spotify Top 100 Songs
+
+<hr>
+
+<div class="column-left">
+### **Welcome to my blog!**
+
+Here you’ll find my adventures coding pop culture, current events, and maybe if I summon the energy, some helpful lessons from my dissertation work. Right now, I’m a PhD candidate in entomology at Michigan State, but I care about modeling and visualizing topics far beyond insects and plants. 
+
+Even though I grew up when Tumblr was in vogue, _blogging_ always scared me until I saw this post and listened to this podcast. Plus, I love sharing my silly little models and visualizations with friends who’ll listen, so why not share them with the world... 
+<br>
+</div>
+
+<div class="column-right">
+<br>
+<br>
+
+![](https://external-preview.redd.it/BeQ96v_4ePcWqEUJbVrfVUkntCqPkI7OMCHssYdS4Ss.jpg?auto=webp&s=5eeb453f59e0030e117fb134c440bebcf98426f0){width=95%}
+<br>
+<br>
+</div>
+
+Most posts will discuss coding in R, but we may venture elsewhere in the future. Today's blog post was really fun to put together and was a constant reliving of an amazing day every year—Spotify Wrapped release day!
+
+### _In this post, I will..._
+
+* learn how to use `tidytext` and apply structural topic models (STM) to identify common trends between songs and years through natural language processing (NLP).  
+
+* dynamically visualize text and model results with gganimate, plotly, and ggiraph.  
+
+<hr>
+
+#### **_(1) Collecting the data_**
+
+`spotifyr` and the Spotify API  
+
+* I’ve been a Spotify listener since 2014 and that loyalty paid off for this post with access to seven (!!) years of Spotify Wrapped. If you’re unfamiliar, Spotify releases each user’s top artists and songs for the year every December. Taking the playlists for 2014-2020, I used the [`spotifyr` R package](https://www.rcharlie.com/spotifyr/) to access the Spotify API and pull out these playlists from library. 
+
+* Here are some posts that can explain how to do collect data from the Spotify API for non-commerical uses more eloquently than me. The API provides far more information than song names and artists alone; you can obtain audio features and popularity data, and some of the write-ups that dive deep into this topic inspired my post today—[tayloR](https://medium.com/@simranvatsa5/taylor-f656e2a09cc3), [a spotifyr beginner's tutorial](https://msmith7161.github.io/what-is-speechiness/), & [a spotifyr quick rundown](https://rafabelokurows.medium.com/analyzing-spotify-songs-data-with-r-programming-language-a-quick-rundown-e7e247b91699).
+
+<br>
+`geniusr` and the Genius API
+
+* To connect these songs to their lyrics, I used the [`geniusr` R package](https://ewenme.github.io/geniusr/) to search the lyrics for each song. This step was tough because some of my top songs are instrumental or remixes and didn’t fit well into my search loop. For those songs, I searched for lyrics separately. 
+
+<br>
+To assemble a dataset that could be useful to interpret with STMs, I had to remove songs were the majority of the lyrics were not in English and filter out stop words like 'oh' and 'ayy.' A future blog post may model songs with lyrics mostly in Spanish. Since this blog is not about collecting data from the Spotify and Genius APIS, I'm not going to highlight it here. However, to see a skeleton of the code I wrote (minus my playlist IDs and manual song entry), please see this post's source code [here](#link).
+
+
+```{r echo = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+setwd("~/Downloads")
+
+load("lyrics_df.rda")
+load("tracks_full.rda")
+load("lyrics_en.rda")
+load("stms.rda")
+```
+
+
+```{r spotify_collect_tidy, echo = FALSE, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+library(spotifyr)
+library(geniusr)
+
+years <- c(2020:2014)
+
+songs <- vector(mode = "list", length = length(years))
+names(songs) <- c(years)
+
+songs[[1]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-1")
+songs[[2]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-2") 
+songs[[3]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-3")
+songs[[4]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-4")
+songs[[5]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-5")
+songs[[6]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-6")
+songs[[7]] <- get_playlist_tracks("SPOTIFY-PLAYLIST-ID-7")
+
+tracks <- vector(mode = "list", length = length(years))
+
+i = 1
+for(i in 1:length(years)) {
+  year <- rep(years[i], length(songs[[i]][,1]))
+  tracks[[i]] <- songs[[i]] %>%
+    mutate(year = year, rank = row_number()) %>%
+    select(rank, year, track.id, track.name, track.popularity, track.album.name, track.album.release_date)
+}
+
+tracks_df <- dplyr::bind_rows(tracks[[1]],
+                              tracks[[2]],
+                              tracks[[3]],
+                              tracks[[4]],
+                              tracks[[5]],
+                              tracks[[6]],
+                              tracks[[7]])
+
+tracks_df$artist.id <- NA
+tracks_df$artist <- NA
+  
+  
+j = 1
+for(j in 1:length(tracks_df[,1])){
+  track_artist <- get_track(tracks_df[j,3])
+  
+  tracks_df[j,8] <- track_artist[["artists"]][["id"]][1]
+  tracks_df[j,9] <- track_artist[["artists"]][["name"]][1]
+}
+
+tracks_feat <- tracks_df
+tracks_feat$danceability <- NA
+tracks_feat$energy <- NA
+tracks_feat$key <- NA
+tracks_feat$loudness <- NA
+tracks_feat$mode <- NA
+tracks_feat$speechiness <- NA
+tracks_feat$acousticness <- NA
+tracks_feat$instrumentalness <- NA
+tracks_feat$liveness <- NA
+tracks_feat$valence <- NA
+tracks_feat$tempo <- NA
+
+
+k = 1
+for(k in 1:length(tracks_feat[,1])){ # the loop timed out around 682 rows so I had to redo this a couple times to get everything - probably has to do with calling from the API...
+  track_feat <- get_track_audio_features(tracks_feat[k,3])
+  
+  tracks_feat$danceability[k] <- track_feat[1]
+  tracks_feat$energy[k] <- track_feat[2]
+  tracks_feat$key[k] <- track_feat[3]
+  tracks_feat$loudness[k] <- track_feat[4]
+  tracks_feat$mode[k] <- track_feat[5]
+  tracks_feat$speechiness[k] <- track_feat[6]
+  tracks_feat$acousticness[k] <- track_feat[7]
+  tracks_feat$instrumentalness[k] <- track_feat[8]
+  tracks_feat$liveness[k] <- track_feat[9]
+  tracks_feat$valence[k] <- track_feat[10]
+  tracks_feat$tempo[k] <- track_feat[11]
+}
+
+tracks_full <- tracks_feat
+
+tracks_full$year <- as.factor(tracks_full$year)
+
+columns <- c(10:20)
+tracks_full[,columns] <- sapply(tracks_full[,columns], as.numeric)
+tracks_full$energy <- as.numeric(tracks_full$energy)
+tracks_full$valence <- as.numeric(tracks_full$valence)
+tracks_full <- tracks_full %>%
+  mutate(row = as.character(row_number()),
+         rank = rep(1:100, 7),
+         rank_weight = rep(100:1, 7))
+
+tracks_full <- tracks_full %>%
+  mutate(track.name.abr = str_replace(track.name, "\\s*\\([^\\)]+\\)", "")) %>%
+  mutate(track.name.abr = str_replace(track.name.abr, "\\s*\\([^\\)]+\\)", "")) %>%
+  mutate(track.name.abr = str_replace(track.name.abr, "\\[.*?\\]", "")) %>%
+  mutate(track.name.abr = str_replace(track.name.abr, "◑", ""))
+  
+```
+
+```{r geniusr_collect_tidy, echo = FALSE, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+lyrics_list <- vector(mode = "list", length = length(tracks_full$track.name))
+
+names(lyrics_list) <- tracks_full$track.name
+
+poss_get_lyrics_search = possibly(get_lyrics_search, otherwise = NULL) # songs that cannot be found are given NULL values and will be manually entered
+
+lyrics_list = map2(tracks_full$artist, tracks_full$track.name.abr, poss_get_lyrics_search) # I manually reviewed each song to ensure they were the correct lyrics
+# Code not shown here (because it contains details of ~50 songs) fixed incorrect lyrics searches on Genius
+
+lyrics <- lyrics_list
+
+names(lyrics) <- tracks_full$track.name
+
+track_names <- as.data.frame(tracks_full$track.name)
+colnames(track_names)[1] <- "track.name"
+
+track_names$artist <- tracks_full$artist
+track_names$needs_lyrics <- NA
+track_names$track.name.abr <- tracks_full$track.name.abr
+
+'%!in%' <- function(x,y)!('%in%'(x,y))  
+
+lyrics_df_en <- lyrics %>%
+  filter(artist_name %!in% c("BLACKPINK", "Bad Bunny, Jowell & Randy & Ñengo Flow", "Bad Bunny & Sech", "Bad Bunny & Jhay Cortez", "Bad Bunny", "ROSALÍA", "ROSALÍA & J Balvin", "C. Tangana", "Stromae", "MC Fioti", "Salvador Sobral", "J Balvin", "Romeo Santos", "Tiago Bettencourt", "ROSALÍA & Travis Scott", "Bomba Estéreo", "Carlos Vives", "Shakira", "Carlos Vives & Shakira", "Danny Ocean", "Calle 13", "Enrique Iglesias", "Major Lazer", "Anitta", "Don Patricio", "Maluma", "Becky G & Bad Bunny", "J Balvin & Willy William")) # only include majority English language songs
+
+tidy_lyrics_en <- lyrics_df_en %>%
+  group_by(section_name, section_artist, song_name, song_id, artist_name, row) %>%
+  mutate(line_number = row_number()) %>%
+  mutate(song_artist = paste(song_name, artist_name, row, sep = "_")) %>%
+  unnest_tokens(word, line) %>%
+  ungroup()
+
+explicit <- c("STRING-OF-WORDS")
+more_stopwords <- c("oh", "ah", "uh", "ooh", "aah", "mu", "woo", "oo", "eh", "di", "da", "ayy", "doo", "doot", "hmm")
+
+lyrics_en <- tidy_lyrics_en %>%
+  anti_join(get_stopwords(language = "en")) %>%
+  anti_join(get_stopwords(language = "es")) %>%
+  filter(word %!in% explicit)
+
+lyrics_en <- as_tibble(lyrics_en) %>%
+  filter(word %!in% more_stopwords)
+
+lyrics_en %>%
+  count(word, sort = TRUE)
+```
+
+<hr>
+
+#### **_(2) Tidying the data_**
+
+* After binding these data frames, I used the `tidytext` R package to bring my data into forms useful for text analysis. Julia Silge and David Robinson have written a whole book on this, so I’ll direct you to the [tidytext book](https://www.tidytextmining.com/) for more information.
+
+<br>
+I want to take my song lyrics in English and split each song into individual words with `unnest_token()`. Note: 'section_name' refers to chorus, bridge, verse, etc.; 'row' is the unique row identifier because some songs appear in multiple years.
+```{r load_libraries, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+library(tidytext)
+library(stm)
+library(dplyr)
+```
+```{r prep_lyrics, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+tidy_lyrics_en <- lyrics_df_en %>%
+  group_by(section_name, section_artist, song_name, song_id, artist_name, row) %>%
+  mutate(line_number = row_number()) %>%
+  mutate(song_artist = paste(song_name, artist_name, row, sep = "_")) %>%
+  unnest_tokens(word, line) %>%
+  ungroup()
+```
+
+<br>
+Let's get rid of most of the words that appear frequently and don't have much meaning outside the music.
+```{r remove_stopwords, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+more_stopwords <- c("oh", "ah", "uh", "ooh", "aah", "mu", "woo", "oo", "eh", "di", "da", "ayy", "doo", "doot", "hmm") # I also added some other words to maintain a 'clean' lyric analysis that aren't included here.
+
+lyrics_en <- tidy_lyrics_en %>%
+  anti_join(get_stopwords(language = "en")) %>%
+  anti_join(get_stopwords(language = "es")) %>%
+  filter(word %!in% explicit)
+
+lyrics_en <- as_tibble(lyrics_en) %>%
+  filter(word %!in% more_stopwords)
+```
+
+<br>
+To run the structural topic model in the next section, we'll need our lyrics into a DocumentTermMatrix.
+```{r make_lyrics_into_right_form, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+lyrics_dfm_en <- lyrics_en %>%
+  select(word, song_artist) %>%
+  count(song_artist, word) %>%
+  ungroup() %>%
+  cast_dfm(song_artist, word, n)
+```
+
+<hr>
+
+#### **_(3) Modeling the data_**
+
+* I was also inspired by [Julia Silge’s post](https://juliasilge.com/blog/evaluating-stm/) on structural topic models and these posts [(1)](https://towardsdatascience.com/text-analytics-topic-modelling-on-music-genres-song-lyrics-deb82c86caa2) and [(2)](https://joshualoong.com/2018/07/03/Topic-Modelling-Song-Lyrics-An-Exploration-in-Unsupervised-Text-Analytics/) on using stms on song data. However, interpreting and visualizing these topics can be notoriously hard, so I’ll demonstrate some ideas below.
+
+<br>
+To model my Top 100 Songs, we'll need to determine what is the "best" number of topics (_K_) that describe the data. These five values for K here are fairly arbitrary (so much as 15 topics is not that different from 16 topics). I spent a long time running a bunch of models not shown here with different values for _K_.
+```{r run_stms, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+stms <- data_frame(K = c(5, 15, 25, 35, 45)) %>%
+  mutate(topic_model = future_map(K, ~stm(lyrics_dfm_en, K = .,
+                                          verbose = FALSE, seed = TRUE))) # this code is strongly based on Julia Silge's post
+```
+
+<br>
+
+There are several metrics to compare the models varying _K_ including held-out likelihood and semantic coherence. To keep this post from being too long, I only show the residuals to compare the models - but I encourage in something more rigorous to look at all these other metrics.
+
+```{r evaluate_stms, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+library(purrr)
+library(ggplot2)
+
+k_resids <- stms %>%
+  mutate(residual = map(topic_model, checkResiduals, lyrics_dfm_en)) %>%
+  transmute(K,
+            residual = map_dbl(residual, "dispersion"))
+
+ggplot(k_resids, aes(x = K, y = residual)) +
+  geom_line()
+```
+- It looks like _K_ = 15 topics marginally has the lowest residuals, so we'll go with that model.
+
+<br>
+
+Next, I'll pull out the values for beta (probability a word is found within a topic) and gamma (probability a topic is found within a 'document;' here, the document is a song).
+```{r best_model, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+topic_model <- stms %>% 
+  filter(K == 15) %>% 
+  pull(topic_model) %>% 
+  .[[1]]
+
+beta_tidy <- tidy(topic_model)
+
+gamma_tidy <- tidy(topic_model, matrix = "gamma",
+                 document_names = rownames(lyrics_dfm_en))
+```
+
+Here's the real fun part — interpreting the topics. I love pop music, and pop music doesn't vary terribly in it's vocabulary. Nevertheless, I tried my best to label these topics for this heurestic exercise.
+
+
+CAUTION: I took some liberty "labelling" the topics resulting from the STMs into plain language. There are some quantitative ways to do label topics, like with the `labelTopics()` function, which I also used to inform my labels. For instance, 'rain' and 'loyalty' were two of the top words for Topic 6 (labeled 'longing') in terms of _highest probability_ and _FREX_. In Topic 8 (labeled 'big dreams'), the top words for _FREX_ and _Score_ were 'stamina,' 'dna,' and 'greatest.'
+
+
+```{r prep_abridged_gamma}
+library(tidyr)
+
+topic <- paste0("Topic ", unique(gamma_tidy$topic))
+label <- c("party", "confident", "wanderer", "winning", "feeling free", "longing", "airy", "big dreams", "self-love", "friends", "mischievious", "nostalgic", "breaking out", "glow up", "in my feelings")
+topic_label <- as.data.frame(cbind(topic, label))
+
+songs <- c("Blue World", "2 Da Moon", "LOYALTY.", "7 rings", "About Today", "Don’t Call Me Up") # we'll dive into these songs later
+
+gamma_abr <- gamma_tidy %>%
+  mutate(topic = as.character(paste0("Topic ", topic)),
+         topic = reorder(topic, gamma)) %>%
+  separate(document, c("song", "artist", "row"), sep = "_", remove = FALSE) %>%
+  filter(song %in% songs) %>%
+  distinct(song, topic, gamma) %>%
+  inner_join(topic_label, by = "topic")
+```
+
+# We'll also average the topic probability across all songs each year to see how my top lyrics' topics change throughout time.
+```{r prep_year_gamma}
+gamma_year <- gamma_tidy %>%
+  mutate(topic = paste0("Topic ", topic),
+         topic = reorder(topic, gamma)) %>%
+  separate(document, c("song", "artist", "row"), sep = "_", remove = FALSE) %>%
+  inner_join(tracks_full, by = "row") %>%
+  mutate(artist = artist.x) %>%
+  select(-artist.x, -artist.y) %>%
+  inner_join(topic_label, by = "topic") %>%
+  group_by(year, topic, label) %>%
+  summarize(mean_gamma_yr = mean(gamma)) %>%
+  ungroup() %>%
+  mutate(year = as.numeric(as.character(year))) 
+
+hl_topics <- c("glow up", "wanderer", "in my feelings")
+gr_topics <- c("party", "confident", "friends", "wanderer", "good times", "feeling free", "longing", "ethereal", "dreaming", "authentically me", "mischievious", "nostalgia", "breaking out", "in my feelings")
+
+'%!in%' <- function(x,y)!('%in%'(x,y))  
+
+gamma_year <- gamma_year %>%
+  mutate(high = case_when(
+    label %in% c("glow up") ~ "A",
+    label %in% c("wanderlust") ~ "B",
+    label %in% c("in my feelings") ~"C",
+    label %in% gr_topics ~ "D"
+  ))
+```
+
+<hr>
+
+#### **_(4) Visualizing the data_**
+
+#### _Artist bubble chart_ 
+
+First I want a bird's-eye of my yearly top song data. I wrote this bubble chart resembling the cross-section of a tree trunk:  
+
+```{r bubble chart, warning = FALSE, message = FALSE, fig.align = 'center', class.output="scroll-10"}
+library(ggiraph)
+library(ggplot2)
+library(packcircles)
+
+top_artist <- tracks_full %>%
+  group_by(artist, year) %>%
+  summarise(count = n()) %>%
+  arrange(-count) %>%
+  arrange(year) %>%
+  mutate(year = as.character(year))
+
+packing <- circleProgressiveLayout(top_artist$count)
+
+dat.gg <- circleLayoutVertices(packing)
+
+colors1 <- as.character(c("#99B898", "#A8E6CE", "#FECEAB", "#FF847C", "#E84A5F", "#D7BDE2" , "#BEC0ED"))
+year <- as.character(2014:2020)
+colors_year <- as.data.frame(cbind(colors1, year))
+
+top_artist <- top_artist %>%
+  inner_join(colors_year) %>%
+  mutate(colors = as.character(colors1))
+
+top_artist$text <- paste(top_artist$artist, "\n", "Song count:", top_artist$count, "\n", "Year:", top_artist$year)
+
+top_artist$id <- c(1:length(top_artist$artist)) 
+
+dat.gg <- dat.gg %>%
+  inner_join(top_artist, by = "id")
+
+bubbles <- ggplot() + 
+  geom_polygon_interactive(data = dat.gg, aes(x, y, group = id, fill = factor(id), tooltip = top_artist$text[id], data_id = year), alpha = 0.6, show.legend = FALSE) +
+  scale_fill_manual(values = top_artist$colors, labels = c('2014', '2015', '2016', '2017', '2018', '2019', '2020')) +
+  theme_void() + 
+  guides(fill = guide_legend_interactive()) +
+  labs(title = "Annual rings of my artists' top songs") +
+  theme(plot.margin=unit(c(0,0,0,0), "cm"), 
+        plot.title = element_text(size = 18, hjust = 0.5)) + 
+  coord_equal()
+
+bubbles_interactive <- ggiraph(ggobj = bubbles, width_svg = 6.2, height_svg = 4.5)
+bubbles_interactive 
+```
+<center>
+
+_Figure 1._ Each bubble and its size represent an artist's song count in that year. The 'rings' of bubbles are colored by year.  
+
+</center>  
+
+
+#### There are more larger bubbles in recent years than earlier in my Spotify tenure. I must be listening to more songs by the same artists in 2018-2020.
+<hr>
+
+#### _Annual music mood scatterplot_  
+
+A common analysis among the spotifyr posts is to visualize the “mood" of a group of songs with Spotify’s audio features. The “mood” can be understood by the valence (positivity rating where lower values are more “negative”) and energy (lower values have lower energy). If we are to break up a plot of energy x valence like here in the sentify Shiny app, we can see how my songs bunch up into each quadrant.  
+
+```{r mood scatterplot, message = FALSE, warning = FALSE}
+library(plotly)
+library(htmltools)
+
+mood <- tracks_full %>%
+  plot_ly(x = ~valence, y = ~energy, size = ~rank_weight, sizes = c(1, 350), text = ~artist, hoverinfo = "text")
+
+mood2 <- mood %>%
+  add_markers(color = ~year, showlegend = F, alpha = 0.05, alpha_stroke = 0.05, colors = colors1) %>%
+  add_markers(color = ~year, frame = ~year, ids = ~artist, colors = colors1) %>%
+  add_segments(x = 0.5, xend = 0.5, y = 0, yend = 1, showlegend = F, line = list(color = "#A9A9A9", width = 0.8)) %>%
+  add_segments(x = 0, xend = 1, y = 0.5, yend = 0.5, showlegend = F, line = list(color = "#A9A9A9", width = 0.8)) %>%
+  layout(xaxis = list(title = "Valence", showgrid = F, font = list(size = 18)),
+         yaxis = list(title = "Energy", font = list(size = 18)),
+         annotations = list(
+           x = c(.05, .05, .95, .95), 
+           y = c(.05, .95, .05, .95), 
+           text = c("Sad", "Angry", "Pleasant", "Happy"),
+           showarrow = FALSE,
+           xanchor = "center",
+           font = list(size = 15, color = "#547980")
+         ),
+         width = 600, height = 500
+  ) %>%
+  animation_opts(1000, easing = "elastic", redraw = FALSE) %>%
+  animation_button(
+    x = 1, xanchor = "right", y = 0, yanchor = "bottom"
+  ) %>%
+  animation_slider(
+    currentvalue = list(prefix = "Year ", font = list(color = "#696969"))
+  )
+
+htmltools::div(mood2, align = "center")
+```
+<br>
+<br>
+<br>
+<br>
+<center>
+Figure legend: Points are songs with the artist’s label shown when hovering. 
+<br>
+Size corresponds to the song’s rank in the Top 100 (bigger points ranked more highly).
+</center>
+
+#### Some conclusions here
+<hr>
+#### _Topic probability by song_  
+Description for topic probability by highlighting some songs.
+
+```{r chunk, warning = FALSE, message = FALSE, fig.align = 'center'}
+group_colors1 <- c(`glow up` = "#B6B4C2", 
+                  wanderer = "#547980", 
+                  `in my feelings` = "#F9CDAD", 
+                  `breaking out` = "#AAC9CE",
+                  confident = "#A8E6CE",
+                  `big dreams` = "#CD7672",
+                  `airy` = "#DCEDC2",
+                  `feeling free` = "#63BCC9",
+                  friends = "#E7E7E7",
+                  `winning` = "#7E9680",
+                  longing = "#ECD59F",
+                  mischievious = "#8AB2E5",
+                  nostalgic = "#FFDD94",
+                  party = "#FF8C94",
+                  `self-love` = "#E5C1CD")
+
+ggplot(gamma_abr, aes(x = song, y = gamma, fill = label)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = group_colors1) +
+  labs(y = "Topic probabilities within song") +
+  coord_flip() +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        axis.title.y = element_blank(),
+        text = element_text(size=12))
+```
+<center>
+Figure legend:
+</center>
+
+#### Some conclusions here
+<hr>
+#### _Topic probability across Top 100 throughout the years_  
+Description for topic probability throughout the years
+
+```{r chunk2, warning = FALSE, message = FALSE, eval = TRUE, fig.align = 'center'}
+library(gganimate)
+
+group_colors2 <- c(A = "#6C5B7B", B = "#547980", C = "#F9CDAD", D = "#D3D3D3")
+group_alpha <- c(A = 1, B = 1, C = 1, D = 0.48)
+group_size <- c(A = 1.55, B = 1.55, C = 1.55, D = 1)
+
+time <- ggplot(gamma_year, aes(year, mean_gamma_yr, group = label, color = high, alpha = high, size = high)) + 
+  geom_line() +
+  geom_segment(aes(xend = 2020.8, yend = mean_gamma_yr), linetype = 2) + 
+  geom_point(size = 2) + 
+  geom_text(aes(x = 2021, label = label), hjust = 0, size = 5.2) + 
+  scale_color_manual(values = group_colors2) + 
+  scale_alpha_manual(values = group_alpha) +
+  scale_size_manual(values = group_size) +
+  xlim(2014, 2021) +
+  transition_reveal(year) + 
+  coord_cartesian(clip = 'off') + 
+  labs(x = 'Year',
+       y = 'Mean gamma (topic probability)') + 
+  theme_classic() +
+  theme(legend.position = 'none',
+        plot.margin = margin(5, 75, 1, 5),
+        text = element_text(size=20))
+
+animate(time, duration = 9.5)
+```
+<center>
+Figure legend:
+</center>
+
+#### Some conclusions here
+
+
+Reproducible code can be found here (minus the datasets of my Spotify Top Songs and initial cleaning code).
