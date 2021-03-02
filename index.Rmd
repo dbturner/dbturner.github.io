@@ -59,7 +59,7 @@ title: About me
 
 <div class="column-right">
 ```{r, echo = FALSE, out.width = "280px"}
-knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homePic_14November2019.jpg")
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homepage_pic.png")
 ```
 <br />
 
