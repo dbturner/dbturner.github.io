@@ -42,16 +42,16 @@ pre[class] {
 ```
 
 # Grad School Musical:
-## Natural Language Processing and my Spotify Top 100 Songs
+## topic modeling and my Spotify Top 100 Songs
 
 <hr>
 
 <div class="column-left">
 ### **Welcome to my blog!**
 
-Here you’ll find my adventures coding pop culture, current events, and maybe if I summon the energy, some helpful lessons from my dissertation work. Right now, I’m a PhD candidate in entomology at Michigan State, but I care about modeling and visualizing topics far beyond insects and plants. 
+Here you’ll find my adventures coding pop culture, current events, and maybe even some helpful lessons from my dissertation work. Right now, I’m a PhD candidate in entomology at Michigan State, but I care about modeling and visualizing topics far beyond insects and plants. 
 
-Even though I grew up when Tumblr was in vogue, _blogging_ always scared me until I saw this post and listened to this podcast. Plus, I love sharing my silly little models and visualizations with friends who’ll listen, so why not share them with the world... 
+Although I grew up when Tumblr was in vogue, _blogging_ always scared me until I saw [this post](http://varianceexplained.org/r/start-blog/) and listened to this [podcast](https://podcast.bestbook.cool/). Plus, I love sharing my models and visualizations with willing friends, so why not share them with the world... 
 <br>
 </div>
 
@@ -66,21 +66,37 @@ Even though I grew up when Tumblr was in vogue, _blogging_ always scared me unti
 
 Most posts will discuss coding in R, but we may venture elsewhere in the future. Today's blog post was really fun to put together and was a constant reliving of an amazing day every year—Spotify Wrapped release day!
 
+<hr>
+
 ### _In this post, I will..._
 
-* learn how to use `tidytext` and apply structural topic models (STM) to identify common trends between songs and years through natural language processing (NLP).  
+* use `tidytext` and apply structural topic models (STM) to identify my listening trends.  
 
 * dynamically visualize text and model results with gganimate, plotly, and ggiraph.  
 
 <hr>
 
-#### **_(1) Collecting the data_**
+### Blog content shortcuts (with focal packages):
 
+1. [Collecting the data](#collecting-the-data) (`spotifyr` and `geniusr`)  
+2. [Tidying the data](#tidying-the-data) (`tidytext`)  
+3. [Modeling the data](#modeling-the-data) (`stm`)  
+4. [Visualizing the data](#visualizing-the-data) 
+    a. [Music as Tree Rings](#music-as-tree-rings) (`ggiraph`)
+    b. [My Moods Through the Years](#my-moods-through-the-years) (`plotly`)
+    c. [Some Key Songs' Topics](#some-key-songs-topics)
+    d. [Lyrics' Topics Over the Years](#lyrics-topics-over-the-years) (`gganimate`)
+    
+
+<hr>
+
+## **(1) Collecting the data**
+<br>
 `spotifyr` and the Spotify API  
 
-* I’ve been a Spotify listener since 2014 and that loyalty paid off for this post with access to seven (!!) years of Spotify Wrapped. If you’re unfamiliar, Spotify releases each user’s top artists and songs for the year every December. Taking the playlists for 2014-2020, I used the [`spotifyr` R package](https://www.rcharlie.com/spotifyr/) to access the Spotify API and pull out these playlists from library. 
+* I’ve been a Spotify listener since 2014 and that loyalty paid off for this post with access to seven (!!) years of Spotify Wrapped. If you’re unfamiliar, the Spotify Wrapped playlist is composed of the listener's Top 100 songs of the year. Taking the playlists for 2014-2020, I used the [`spotifyr` R package](https://www.rcharlie.com/spotifyr/) to access the Spotify API and pull out these playlists from library. 
 
-* Here are some posts that can explain how to do collect data from the Spotify API for non-commerical uses more eloquently than me. The API provides far more information than song names and artists alone; you can obtain audio features and popularity data, and some of the write-ups that dive deep into this topic inspired my post today—[tayloR](https://medium.com/@simranvatsa5/taylor-f656e2a09cc3), [a spotifyr beginner's tutorial](https://msmith7161.github.io/what-is-speechiness/), & [a spotifyr quick rundown](https://rafabelokurows.medium.com/analyzing-spotify-songs-data-with-r-programming-language-a-quick-rundown-e7e247b91699).
+* Here is the [documentation](https://www.rcharlie.com/spotifyr/) for how to do collect data from the Spotify API for non-commerical uses. The API provides far more information than song names and artists alone; you can obtain audio features and popularity data, and some of the write-ups that dive deep into this topic inspired my post today—[tayloR](https://medium.com/@simranvatsa5/taylor-f656e2a09cc3), [a spotifyr beginner's tutorial](https://msmith7161.github.io/what-is-speechiness/), & [a spotifyr quick rundown](https://rafabelokurows.medium.com/analyzing-spotify-songs-data-with-r-programming-language-a-quick-rundown-e7e247b91699).
 
 <br>
 `geniusr` and the Genius API
@@ -88,7 +104,7 @@ Most posts will discuss coding in R, but we may venture elsewhere in the future.
 * To connect these songs to their lyrics, I used the [`geniusr` R package](https://ewenme.github.io/geniusr/) to search the lyrics for each song. This step was tough because some of my top songs are instrumental or remixes and didn’t fit well into my search loop. For those songs, I searched for lyrics separately. 
 
 <br>
-To assemble a dataset that could be useful to interpret with STMs, I had to remove songs were the majority of the lyrics were not in English and filter out stop words like 'oh' and 'ayy.' A future blog post may model songs with lyrics mostly in Spanish. Since this blog is not about collecting data from the Spotify and Genius APIS, I'm not going to highlight it here. However, to see a skeleton of the code I wrote (minus my playlist IDs and manual song entry), please see this post's source code [here](#link).
+To assemble a dataset that could be useful to interpret with structural topic models, I had to remove songs were the majority of the lyrics were not in English and filter out stop words like 'oh' and 'ayy.' A future blog post may model songs with lyrics mostly in Spanish. Since this blog is not about collecting data from the Spotify and Genius APIs, I'm not going to highlight it here. However, to see a skeleton of the code I wrote (minus my playlist IDs and manual song entry), please see this post's source code [here](https://github.com/dbturner/dbturner.github.io/blob/main/blog/blog_1_spotify_100_stm.Rmd).
 
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
@@ -250,12 +266,14 @@ lyrics_en %>%
 
 <hr>
 
-#### **_(2) Tidying the data_**
+## **(2) Tidying the data**
+<br>
 
-* After binding these data frames, I used the `tidytext` R package to bring my data into forms useful for text analysis. Julia Silge and David Robinson have written a whole book on this, so I’ll direct you to the [tidytext book](https://www.tidytextmining.com/) for more information.
+After binding the Spotify and Genius dataframes, I used the `tidytext` R package to bring my data into forms useful for text analysis. Julia Silge and David Robinson have written a whole book on this package, so definitely check out the [tidytext book](https://www.tidytextmining.com/).
 
 <br>
-I want to take my song lyrics in English and split each song into individual words with `unnest_token()`. Note: 'section_name' refers to chorus, bridge, verse, etc.; 'row' is the unique row identifier because some songs appear in multiple years.
+We'll start with the song lyrics in English and split each song into individual words with `unnest_token()`.   
+Note: 'section_name' refers to chorus, bridge, verse, etc.; 'row' is the unique row identifier because some songs appear in multiple years.
 ```{r load_libraries, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 library(tidytext)
 library(stm)
@@ -271,7 +289,7 @@ tidy_lyrics_en <- lyrics_df_en %>%
 ```
 
 <br>
-Let's get rid of most of the words that appear frequently and don't have much meaning outside the music.
+Let's remove most of the words that appear frequently and don't have much meaning outside the music.
 ```{r remove_stopwords, eval = FALSE, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 more_stopwords <- c("oh", "ah", "uh", "ooh", "aah", "mu", "woo", "oo", "eh", "di", "da", "ayy", "doo", "doot", "hmm") # I also added some other words to maintain a 'clean' lyric analysis that aren't included here.
 
@@ -285,7 +303,7 @@ lyrics_en <- as_tibble(lyrics_en) %>%
 ```
 
 <br>
-To run the structural topic model in the next section, we'll need our lyrics into a DocumentTermMatrix.
+To run the structural topic models in the next section, we'll need our lyrics into a DocumentTermMatrix.
 ```{r make_lyrics_into_right_form, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 lyrics_dfm_en <- lyrics_en %>%
   select(word, song_artist) %>%
@@ -296,9 +314,10 @@ lyrics_dfm_en <- lyrics_en %>%
 
 <hr>
 
-#### **_(3) Modeling the data_**
+## **(3) Modeling the data**
+<br>
 
-* I was also inspired by [Julia Silge’s post](https://juliasilge.com/blog/evaluating-stm/) on structural topic models and these posts [(1)](https://towardsdatascience.com/text-analytics-topic-modelling-on-music-genres-song-lyrics-deb82c86caa2) and [(2)](https://joshualoong.com/2018/07/03/Topic-Modelling-Song-Lyrics-An-Exploration-in-Unsupervised-Text-Analytics/) on using stms on song data. However, interpreting and visualizing these topics can be notoriously hard, so I’ll demonstrate some ideas below.
+* I was also inspired by [Julia Silge’s post](https://juliasilge.com/blog/evaluating-stm/) on structural topic models and a post on [topic modeling music genres](https://towardsdatascience.com/text-analytics-topic-modelling-on-music-genres-song-lyrics-deb82c86caa2) to use structural topic models to evaluate my song data. However, interpreting and visualizing the topics fit from these models can be notoriously hard, and some visualization ideas are demonstrated below.
 
 <br>
 To model my Top 100 Songs, we'll need to determine what is the "best" number of topics (_K_) that describe the data. These five values for K here are fairly arbitrary (so much as 15 topics is not that different from 16 topics). I spent a long time running a bunch of models not shown here with different values for _K_.
@@ -310,9 +329,9 @@ stms <- data_frame(K = c(5, 15, 25, 35, 45)) %>%
 
 <br>
 
-There are several metrics to compare the models varying _K_ including held-out likelihood and semantic coherence. To keep this post from being too long, I only show the residuals to compare the models - but I encourage in something more rigorous to look at all these other metrics.
+There are several metrics to compare the models varying _K_ including held-out likelihood and semantic coherence. For brevity, I only show the residuals to compare the models - but I encourage looking at all of these comparison metrics for more rigorous analyses than this blog post.
 
-```{r evaluate_stms, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
+```{r evaluate_stms, message = FALSE, warning = FALSE, fig.align = 'center', tidy.opts=list(width.cutoff=20)}
 library(purrr)
 library(ggplot2)
 
@@ -322,13 +341,15 @@ k_resids <- stms %>%
             residual = map_dbl(residual, "dispersion"))
 
 ggplot(k_resids, aes(x = K, y = residual)) +
-  geom_line()
+  geom_line() +
+  theme_classic()
 ```
+
 - It looks like _K_ = 15 topics marginally has the lowest residuals, so we'll go with that model.
 
 <br>
 
-Next, I'll pull out the values for beta (probability a word is found within a topic) and gamma (probability a topic is found within a 'document;' here, the document is a song).
+Next, I pull out the values for beta (probability a word comes from a topic) and gamma (probability of a topic within a 'document;' here, the document is a song).
 ```{r best_model, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 topic_model <- stms %>% 
   filter(K == 15) %>% 
@@ -341,13 +362,14 @@ gamma_tidy <- tidy(topic_model, matrix = "gamma",
                  document_names = rownames(lyrics_dfm_en))
 ```
 
-Here's the real fun part — interpreting the topics. I love pop music, and pop music doesn't vary terribly in it's vocabulary. Nevertheless, I tried my best to label these topics for this heurestic exercise.
+<br>
+Here's the real fun part — interpreting the topics. As a reminder, we are do a text analysis only on the lyrics (for now). We'll get into audio features later in the visualizations.
+<br>
+
+I love pop music, but pop lyrics don't tend to vary much. Nevertheless, I tried my best to label these topics for this heurestic exercise. I took liberty "labeling" the topics from the STMs into meaningful language. There are quantitative ways to do label topics, like with the `labelTopics()` function, which I also used to determine my labels. For instance, 'rain' and 'loyalty' were two of the top words for Topic 6 (labeled 'longing') in terms of _highest probability_ and _FREX_. In Topic 8 (labeled 'big dreams'), the top words for _FREX_ and _Score_ were 'stamina,' 'dna,' and 'greatest.'
 
 
-CAUTION: I took some liberty "labelling" the topics resulting from the STMs into plain language. There are some quantitative ways to do label topics, like with the `labelTopics()` function, which I also used to inform my labels. For instance, 'rain' and 'loyalty' were two of the top words for Topic 6 (labeled 'longing') in terms of _highest probability_ and _FREX_. In Topic 8 (labeled 'big dreams'), the top words for _FREX_ and _Score_ were 'stamina,' 'dna,' and 'greatest.'
-
-
-```{r prep_abridged_gamma}
+```{r prep_abridged_gamma, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 library(tidyr)
 
 topic <- paste0("Topic ", unique(gamma_tidy$topic))
@@ -365,8 +387,10 @@ gamma_abr <- gamma_tidy %>%
   inner_join(topic_label, by = "topic")
 ```
 
-# We'll also average the topic probability across all songs each year to see how my top lyrics' topics change throughout time.
-```{r prep_year_gamma}
+<br>
+We'll also average the topic probability across all songs each year to see how my top lyrics' topics change throughout time.
+
+```{r prep_year_gamma, message = FALSE, warning = FALSE, tidy.opts=list(width.cutoff=20)}
 gamma_year <- gamma_tidy %>%
   mutate(topic = paste0("Topic ", topic),
          topic = reorder(topic, gamma)) %>%
@@ -388,7 +412,7 @@ gr_topics <- c("party", "confident", "friends", "wanderer", "good times", "feeli
 gamma_year <- gamma_year %>%
   mutate(high = case_when(
     label %in% c("glow up") ~ "A",
-    label %in% c("wanderlust") ~ "B",
+    label %in% c("wanderer") ~ "B",
     label %in% c("in my feelings") ~"C",
     label %in% gr_topics ~ "D"
   ))
@@ -396,11 +420,11 @@ gamma_year <- gamma_year %>%
 
 <hr>
 
-#### **_(4) Visualizing the data_**
+## **(4) Visualizing the data**
 
-#### _Artist bubble chart_ 
+## _Music as Tree Rings_ 
 
-First I want a bird's-eye of my yearly top song data. I wrote this bubble chart resembling the cross-section of a tree trunk:  
+We have a lot of data with this project, so I'll start by looking at the basics. Let's see who I listened to from 2014-2020 with this bubble chart resembling the cross-section of a tree:  
 
 ```{r bubble chart, warning = FALSE, message = FALSE, fig.align = 'center', class.output="scroll-10"}
 library(ggiraph)
@@ -438,7 +462,7 @@ bubbles <- ggplot() +
   scale_fill_manual(values = top_artist$colors, labels = c('2014', '2015', '2016', '2017', '2018', '2019', '2020')) +
   theme_void() + 
   guides(fill = guide_legend_interactive()) +
-  labs(title = "Annual rings of my artists' top songs") +
+  # labs(title = "Annual rings of my artists' top songs") +
   theme(plot.margin=unit(c(0,0,0,0), "cm"), 
         plot.title = element_text(size = 18, hjust = 0.5)) + 
   coord_equal()
@@ -446,19 +470,19 @@ bubbles <- ggplot() +
 bubbles_interactive <- ggiraph(ggobj = bubbles, width_svg = 6.2, height_svg = 4.5)
 bubbles_interactive 
 ```
-<center>
+Bubbles are colored by year. A bubble represents at least one song by an artist. The larger the size, the more songs an artist had in my Top 100 that year. Try hovering over a couple bubbles to see for yourself.
+<br>  
 
-_Figure 1._ Each bubble and its size represent an artist's song count in that year. The 'rings' of bubbles are colored by year.  
-
-</center>  
-
-
-#### There are more larger bubbles in recent years than earlier in my Spotify tenure. I must be listening to more songs by the same artists in 2018-2020.
+There are more larger bubbles in recent years than earlier in my Spotify tenure. I must be listening to more songs by the same artists in 2018-2020.
 <hr>
 
-#### _Annual music mood scatterplot_  
+<center>
+## _My Moods Through the Years_  
+</center>
 
-A common analysis among the spotifyr posts is to visualize the “mood" of a group of songs with Spotify’s audio features. The “mood” can be understood by the valence (positivity rating where lower values are more “negative”) and energy (lower values have lower energy). If we are to break up a plot of energy x valence like here in the sentify Shiny app, we can see how my songs bunch up into each quadrant.  
+Next, I'll use the audio features Spotify already provides when you collect data from their API. A common analysis among the spotifyr posts is to visualize the “mood" of a group of songs with Spotify’s audio features, not solely the lyrics like in the structural topic models. The “mood” can be understood by the valence (positivity rating where lower values are more “negative”) and energy (lower values have lower energy). If we are to break up a plot of energy x valence like here in the [Sentify Shiny app](http://rcharlie.net/sentify/), we can see how my songs bunch up into each quadrant.  
+
+This `plotly` graph shows the moods of my Top 100 songs throughout seven years of my Spotify Wrapped playlists. Click play or drag the the year bar to see how many songs are happy, pleasant, sad, or angry in each year.
 
 ```{r mood scatterplot, message = FALSE, warning = FALSE}
 library(plotly)
@@ -498,16 +522,17 @@ htmltools::div(mood2, align = "center")
 <br>
 <br>
 <br>
-<center>
-Figure legend: Points are songs with the artist’s label shown when hovering. 
-<br>
-Size corresponds to the song’s rank in the Top 100 (bigger points ranked more highly).
-</center>
+Bubbles are songs. Bubble size corresponds to the song’s rank in the Top 100 (bigger points ranked more highly).
 
-#### Some conclusions here
+<br>
+I seem to listen to more energetic songs as time goes on! 2014 seemed to be the "saddest" year based on the number of dots in that quadrant. Well, it was the end of my teenage years. I also had a lot of high energy songs in 2020, probably to counteract the perpetual quarantine.
 <hr>
-#### _Topic probability by song_  
-Description for topic probability by highlighting some songs.
+
+<center>
+## _Some Key Songs' Topics_  
+
+</center>
+Now, let's go back to the output from the structural topic model we ran in [Section 3](#modeling-the-data). Here are the gamma values (probabilities of a topic within a song) for a handful of songs that I picked out of arbitrary interest for this visualization. This visualization is just to show the variability in evenness of gammas across songs, and it's helpful to see how 
 
 ```{r chunk, warning = FALSE, message = FALSE, fig.align = 'center'}
 group_colors1 <- c(`glow up` = "#B6B4C2", 
@@ -529,21 +554,21 @@ group_colors1 <- c(`glow up` = "#B6B4C2",
 ggplot(gamma_abr, aes(x = song, y = gamma, fill = label)) +
   geom_bar(stat = "identity", position = "stack") +
   scale_fill_manual(values = group_colors1) +
-  labs(y = "Topic probabilities within song") +
+  labs(y = "Gamma values for each song") +
   coord_flip() +
   theme_classic() +
   theme(legend.title = element_blank(),
         axis.title.y = element_blank(),
         text = element_text(size=12))
 ```
-<center>
-Figure legend:
-</center>
 
-#### Some conclusions here
+Kind of cool that "Loyalty" by Kendrick Lamar has a pretty high gamma value for 'longing.' Meanwhile, "About Today" by The National (a sad, sad song about losing love) had higher gamma values for more topics, but the highest topic prob was 'in my feelings' (topic keywords include: falling, love, apart, drift).
 <hr>
-#### _Topic probability across Top 100 throughout the years_  
-Description for topic probability throughout the years
+
+
+## _Lyrics' Topics Over the Years_  
+
+Finally, we'll plot the mean gamma values by year. I've highlighted three topics (in color) to help tell the story of my Spotify Wrapped: 'wanderer,' 'in my feelings,' and 'glow up.'
 
 ```{r chunk2, warning = FALSE, message = FALSE, eval = TRUE, fig.align = 'center'}
 library(gganimate)
@@ -563,20 +588,37 @@ time <- ggplot(gamma_year, aes(year, mean_gamma_yr, group = label, color = high,
   xlim(2014, 2021) +
   transition_reveal(year) + 
   coord_cartesian(clip = 'off') + 
-  labs(x = 'Year',
-       y = 'Mean gamma (topic probability)') + 
+  labs(y = 'Mean gamma (topic probability)') + 
   theme_classic() +
   theme(legend.position = 'none',
+        axis.title.x = element_blank(),
         plot.margin = margin(5, 75, 1, 5),
         text = element_text(size=20))
 
 animate(time, duration = 9.5)
 ```
-<center>
-Figure legend:
-</center>
+<br>  
 
-#### Some conclusions here
+#### A few possible correlations for what we're seeing here:
+- in my feelings: I was generally getting less and less in my feelings until.....2020.....
+- wanderer: I was traveling a lot looking for grad schools and visiting friends around 2017-2018
+- glow up: I was becoming my best self until.....2020.....(joking!)
+
+<hr>
+
+### A few caveats:
+- This dataset is far from comprehensive or complete. It's based on whatever formula Spotify uses to determine our yearly "Top Songs." It's unclear if the formula is based on listen count and/or other metrics.
+- The analysis here doesn't account for covariates like the song's rank in the Top 100. 
+- The labels here are pretty subjective, but there doesn't seem to be a standard way of labeling the topics. So I got to have fun thinking about them!
+- I couldn't filter out all non-English words as 'stop words.' For example, "Remember Me" by Miguel featuring Natalia Lafourcade has ~40% lyrics in Spanish. In this and other multilingual songs, I didn't filter out all non-English words. This limitation inevitably messed with the exclusivity of words in topics and topic fitting.
+<hr>
+
+### A main takeaway:
+Even though it was fun working with these data and packages, this modeling and visualization approach is no replacement for listening and feeling the music we love! No single topic label or audio metric can encapsulate the songs' entire mood and meaning. Nevertheless, I enjoyed learning how to run and visualize structural topic models with this exercise. I hope some of this blog inspires you to look at what you listen to and try to identify your own listening trends!
 
 
-Reproducible code can be found here (minus the datasets of my Spotify Top Songs and initial cleaning code).
+<br>
+<br>
+
+<hr>
+##### Post last updated on 1 March 2021
