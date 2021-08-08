@@ -55,7 +55,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 
 
 ```{r}
-cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://dbturner.github.io/cv/cv.pdf)")
+cat("[<i class='fas fa-download'></i> Full Curriculum Vitae here](https://dbturner.github.io/cv/cv.pdf)")
 ```
 
 Contact {#contact}
@@ -86,7 +86,7 @@ CV %>% print_language_bars()
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made with the R package [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](http://nickstrayer.me/datadrivencv/index.html). 
+Made with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](http://nickstrayer.me/datadrivencv/index.html). 
 
 The source code is available [on github.com/dbturner/cv](https://github.com/dbturner/dbturner.github.io/tree/master/cv).
 
@@ -102,7 +102,7 @@ Daniel B. Turner {#title}
 
 ```{r}
 # Note the special double pipe so we modify the CV object in place
-CV %<>% print_text_block("intro") 
+# CV %<>% print_text_block("intro") 
 ```
 
 Education {data-icon=graduation-cap data-concise=true}
@@ -110,6 +110,15 @@ Education {data-icon=graduation-cap data-concise=true}
 
 ```{r}
 CV %<>% print_section('education')
+```
+  
+
+Work Experience {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+
+```{r}
+CV %<>% print_section('work_experience')
 ```
 
 
@@ -120,24 +129,6 @@ Software Development  {data-icon=desktop}
 CV %<>% print_section('software') 
 ```
 
-
-
-Publications  {data-icon=book}
---------------------------------------------------------------------------------
-
-```{r}
-CV %<>% print_section('publications') 
-```
-  
-  
-
-Teaching Experience {data-icon=chalkboard-teacher}
---------------------------------------------------------------------------------
-
-
-```{r}
-CV %<>% print_section('teaching_positions')
-```
 <br>
 <br>
 
