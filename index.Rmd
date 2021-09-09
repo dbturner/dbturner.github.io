@@ -33,21 +33,24 @@ title: About me
 ***********************************************************************************  
 
 <div class="column-left">
-#### I'm a quantitative ecologist studying how biogeography and chemical diversity influence interactions between plants and insects. As a PhD candidate in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I assemble and analyze big ecological datasets and run field experiments in southwestern Michigan.
+#### I'm a quantitative ecologist studying how time and chemical diversity influence interactions between plants and insects. As a PhD candidate in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I assemble and analyze big ecological datasets and run field experiments in southwestern Michigan.
 
 ***********************************************************************************  
-#### In the past, I researched Hispaniolan frog and toad phylogenetics and urban ecosystem services in the Philadelphia region. Currently, I focus on found projects:  
+#### In the past, I researched Hispaniolan frog and toad phylogenetics and urban ecosystem services in the Philadelphia region. Currently, I focus on four projects:  
 
-(1) Assembling a database of terpene diversity in plants.
-(2) Integrating ecologists' coding tools into effective public communication (see below)
-(3) Building a dataset to predict novel plant-insect interactions from dozens of natural history studies.
-(4) Modeling plant-herbivore temporal dynamics in the tall goldenrod (_Solidago altissima_) system  
+##### 1. Engineering a database of terpene diversity in plants. 
+
+##### 2. Modeling plant-herbivore temporal dynamics in the tall goldenrod (_Solidago altissima_) system    
+
+##### 3. Integrating ecologists' coding tools into effective stakeholder communication (see below)    
+
+##### 4. Building a dataset to predict novel plant-insect interactions from dozens of natural history studies.  
 
 ***********************************************************************************  
 
-#### Ecologists today know how to code. Traditionally in the ecological community, coding has been limited to sharing data with other ecologists. However, coding can accomplish so much more if ecologists employ this tool more broadly to non-scientific stakeholders. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. 
+#### Ecologists today know how to code. Traditionally in the ecological community, coding has been limited to sharing data with other ecologists. However, coding can accomplish so much more if ecologists employ this tool more broadly to other audiences. For that reason, I develop tools for field biologists to communicate their research with public audiences by leveraging the quantitative skills used for data analysis and publication. 
 
-#### These tools, called [`c4bi` (Coding for broader impact)](https://dbturner.github.io/c4bi), are created in collaboration with the [Integrative Ecology Lab at Temple University](https://www.iecolab.org/). Our publication on the framework and programming workflow outlined in this project is forthcoming, and we are excited to share it with the ecological community, and other scientists who code and work across technical and non-technical audiences!
+#### These tools, called [`c4bi` (Coding for broader impact)](https://dbturner.github.io/c4bi), are created in collaboration with the [Integrative Ecology Lab at Temple University](https://www.iecolab.org/). Our publication on the framework and programming workflow outlined in this project is in press at _Frontiers in Ecology and the Environment_, and we are excited to share it with the ecological community and other scientists who code and work with many stakeholders.
 
 ***********************************************************************************  
 
@@ -59,7 +62,7 @@ title: About me
 
 <div class="column-right">
 ```{r, echo = FALSE, out.width = "280px"}
-knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homepage_pic.png")
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/homepage_pic2.png")
 ```
 <br />
 

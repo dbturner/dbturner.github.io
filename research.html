@@ -13,12 +13,22 @@
 
 <title>Research Projects</title>
 
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -32,12 +42,16 @@
   gtag('config', 'UA-171127410-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -50,32 +64,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -85,10 +74,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -105,40 +90,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 61px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h2 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h3 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h4 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h5 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h6 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -166,7 +124,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -178,7 +136,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -189,10 +147,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -204,7 +175,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -300,7 +270,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -312,44 +282,76 @@ $(document).ready(function () {
 <style>
 .column-left{
   float: left;
-  width: 63%;
+  width: 58%;
   text-align: left;
 }
 .column-right{
   float: right;
-  width: 35%;
+  width: 38%;
   text-align: center;
 }
 </style>
 <hr />
-<div class="column-left">
-<h2 id="how-do-insect-communities-assemble-on-non-native-plants"><em>How do insect communities assemble on non-native plants?</em></h2>
-<p><br /></p>
-<h4 id="humans-have-distributed-plants-around-the-world-and-in-the-process-we-have-indirectly-initiated-novel-interactions-between-plants-and-insects.-many-non-native-plants-are-successful-colonizers-of-their-new-habitats-yet-they-still-host-native-herbivorous-insects.-while-these-novel-community-interactions-have-been-documented-across-numerous-biological-control-studies-and-invasive-plant-species-investigations-we-have-not-systematically-understood-broad-patterns-about-novel-host-herbivore-interactions-across-plant-species-using-these-data.-with-over-50-plant-species-identified-in-a-meta-analysis-i-use-web-scraping-and-text-analysis-tools-to-quickly-process-and-collect-insect-and-plant-trait-data-from-grey-and-peer-reviewed-literature.-with-this-project-we-wil-performing-a-meta-analysis-to-understand-the-differences-in-herbivore-community-composition-species-diversity-and-trait-diversity-between-a-plants-native-and-novel-ranges.-by-comparing-insect-communities-in-these-two-ranges-we-can-answer-fundamental-questions-about-the-traits-that-predict-how-communities-assembly-on-novel-hosts.">Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant’s native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.</h4>
-<p><br /> <br /></p>
-<hr />
-<p><br /></p>
-<h2 id="how-does-ontogenetic-variation-in-plant-populations-affect-plant-insect-interactions"><em>How does ontogenetic variation in plant populations affect plant-insect interactions?</em></h2>
-<p><br /></p>
-<h4 id="intraspecific-diversity-in-plant-populations-has-positive-effects-on-insect-community-diversity.-ontogenetic-traits-like-the-regulation-of-plant-defense-growth-and-reproduction-may-be-a-mechanism-for-the-maintenance-of-diversity-in-insect-communities-yet-we-have-not-fully-integrated-temporal-ecology-into-intraspecific-diversity-experiments.-using-common-garden-and-greenhouse-experiments-with-tall-goldenrod-solidago-altissima-at-kellogg-biological-station-i-manipulate-combinations-of-genotypes-with-varying-ontogenetic-trajectories-to-observe-how-interactions-varying-across-goldenrod-genotypes-over-time.-incorporating-often-overlooked-within-season-temporal-variation-explains-the-patterns-that-we-have-observed-at-a-single-point-in-time-or-as-an-average-across-the-growing-season.">Intraspecific diversity in plant populations has positive effects on insect community diversity. Ontogenetic traits, like the regulation of plant defense, growth, and reproduction, may be a mechanism for the maintenance of diversity in insect communities, yet we have not fully integrated temporal ecology into intraspecific diversity experiments. Using common garden and greenhouse experiments with tall goldenrod (<em>Solidago altissima</em>) at <a href="http://www.kbs.msu.edu/">Kellogg Biological Station</a>, I manipulate combinations of genotypes with varying ontogenetic trajectories to observe how interactions varying across goldenrod genotypes over time. Incorporating often overlooked within-season temporal variation explains the patterns that we have observed at a single point in time or as an average across the growing season.</h4>
-<p><br /> <br /></p>
-<hr />
-<p><br /></p>
-<h2 id="how-do-we-leverage-field-biologists-quantitative-skills-for-effective-public-communication"><em>How do we leverage field biologists’ quantitative skills for effective public communication?</em></h2>
-<p><br /></p>
-<h4 id="while-effective-public-communication-advances-conservation-and-educational-goals-within-and-outside-the-scientific-community-we-have-not-formally-integrated-all-communication-tools-available-to-us.-in-collaboration-with-drs.-jocelyn-behm-and-matthew-helmus-from-the-integrative-ecology-lab-at-temple-university-i-work-to-develop-and-share-data-communication-tools-to-leverage-the-quantitative-skills-that-field-biologists-like-ecologists-learn-in-their-professional-training.-we-have-designed-a-framework-and-coding-workflow-using-the-r-statistical-language-and-its-associated-document-generating-language-r-markdown-to-generate-unique-informative-and-customizable-reports-for-public-stakeholders.-these-reports-which-communicate-research-data-potentially-taken-over-dozens-of-locations-can-be-individualized-in-our-workflow-so-that-each-stakeholder-receives-system-specific-information.-we-are-publishing-this-work-and-code-as-an-article-soon.-if-youd-like-to-see-our-the-package-repository-and-tutorial-in-the-meantime-check-out-the-c4bi-coding-for-broader-impact-website-here">While effective public communication advances conservation and educational goals within and outside the scientific community, we have not formally integrated all communication tools available to us. In collaboration with Drs. Jocelyn Behm and Matthew Helmus from the <a href="https://www.iecolab.org/">Integrative Ecology Lab</a> at Temple University, I work to develop and share data communication tools to leverage the quantitative skills that field biologists like ecologists learn in their professional training. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. We are publishing this work and code as an article soon. If you’d like to see our the package repository and tutorial in the meantime, check out the <code>c4bi</code> (Coding for broader impact) website <a href="https://dbturner.github.io/c4bi">here</a>!</h4>
-<p><br /> <br /></p>
-<hr />
-<p><br /></p>
-<h2 id="why-do-plants-have-so-many-terpene-compounds"><em>Why do plants have so many terpene compounds?</em></h2>
-<p><br /></p>
-<h4 id="with-the-advance-of-large-scale-phytochemical-datasets-ecologists-evolutionary-biologists-and-biochemists-now-have-the-unique-opportunity-synthesize-individual-results-into-broader-patterns-about-the-diversity-abundance-temporal-and-spatial-variation-and-evolution-of-phytochemicals-across-the-plant-tree-of-life.-at-least-three-major-logistical-constraints-prevent-the-scientific-community-from-understanding-general-patterns-in-the-ecological-relevance-and-evolution-of-plant-secondary-metabolites-1-the-reference-of-scale-e.g.-individual-population-species-alpha--beta--gamma-diversity-2-the-relationship-between-phytochemical-diversity-and-abundance-and-3-methodological-variation-in-phytochemical-extraction-and-analysis.-a-tractable-class-of-secondary-metabolitesterpenespresents-the-opportunity-to-relate-these-data-to-answer-broad-questions-regarding-scale-phytochemical-diversity-abundance-relationships-and-methodological-heterogeneity.-in-this-project-i-am-creating-a-large-relational-database-to-answer-key-hypotheses-about-the-origins-and-effects-of-terpene-diversity-and-how-this-diversity-varies-across-scales.">With the advance of large-scale phytochemical datasets, ecologists, evolutionary biologists, and biochemists now have the unique opportunity synthesize individual results into broader patterns about the diversity, abundance, temporal and spatial variation, and evolution of phytochemicals across the plant tree of life. At least three major logistical constraints prevent the scientific community from understanding general patterns in the ecological relevance and evolution of plant secondary metabolites: (1) the reference of scale (e.g., individual, population, species; <span class="math inline">\(\alpha\)</span>-, <span class="math inline">\(\beta\)</span>-, <span class="math inline">\(\gamma\)</span>-diversity); (2) the relationship between phytochemical diversity and abundance; and (3) methodological variation in phytochemical extraction and analysis. A tractable class of secondary metabolites—<em>terpenes</em>—presents the opportunity to relate these data to answer broad questions regarding scale, phytochemical diversity-abundance relationships, and methodological heterogeneity. In this project, I am creating a large relational database to answer key hypotheses about the origins and effects of terpene diversity and how this diversity varies across scales.</h4>
-<p><br /> <br /></p>
+<div id="the-global-distribution-of-plant-terpenes-and-terpenoids" class="section level2 column-left">
+<h2><em>The global distribution of plant terpenes and terpenoids</em></h2>
+<div id="terpenes-and-terpenoids-represent-one-of-the-most-diverse-classes-of-secondary-metabolites-produced-by-plants.-these-phytochemicals-can-repel-enemies-attract-pollinators-dispersers-and-defenders-and-communicate-to-neighboring-plants.-despite-significant-ecological-and-evolutionary-consequences-patterns-in-terpene-and-terpenoid-abundance-and-diversity-in-plants-are-largely-unknown-due-to-widespread-variation-in-growth-conditions-and-chemical-compound-detection-methods.-however-with-recent-advancements-in-data-mining-and-statistical-modeling-we-can-synthesize-known-terpene-and-terpenoid-profiles-to-identify-broad-patterns-like-the-distribution-of-terpenoid-diversity-globally-and-across-plant-organs.-by-uncovering-global-patterns-in-terpenoid-diversity-across-the-plant-phylogeny-we-can-move-closer-toward-understanding-how-secondary-metabolites-like-terpenes-and-terpenoids-mediate-interactions-between-plants-and-their-communities." class="section level4">
+<h4>Terpenes and terpenoids represent one of the most diverse classes of secondary metabolites produced by plants. These phytochemicals can repel enemies, attract pollinators, dispersers, and defenders, and communicate to neighboring plants. Despite significant ecological and evolutionary consequences, patterns in terpene and terpenoid abundance and diversity in plants are largely unknown due to widespread variation in growth conditions and chemical compound detection methods. However, with recent advancements in data mining and statistical modeling, we can synthesize known terpene and terpenoid profiles to identify broad patterns like the distribution of terpenoid diversity globally and across plant organs. By uncovering global patterns in terpenoid diversity across the plant phylogeny, we can move closer toward understanding how secondary metabolites, like terpenes and terpenoids, mediate interactions between plants and their communities.</h4>
+</div>
+<div id="however-before-we-can-answer-these-questions-we-must-synthesize-what-we-know-about-plant-terpenes-and-organize-in-a-central-location-for-end-users.-alongside-a-team-of-biologists-im-developing-collaborative-data-collection-pipelines-through-r-shiny-applications-that-help-us-extract-data-from-existing-literature-about-plant-terpenes-and-terpenoids.-we-then-build-a-cloud-hosted-sql-database-for-access-across-collaborators-and-users-interested-in-answering-a-wide-range-of-questions-from-terpene-sources-of-aroma-in-wine-grapes-to-how-lab-techniques-influence-compound-detection-efficacy." class="section level4">
+<h4>However, before we can answer these questions, we must synthesize what we know about plant terpenes and organize in a central location for end users. Alongside a team of biologists, I’m developing collaborative data collection pipelines through R Shiny applications that help us extract data from existing literature about plant terpenes and terpenoids. We then build a cloud-hosted SQL database for access across collaborators and users interested in answering a wide range of questions, from terpene sources of aroma in wine grapes to how lab techniques influence compound detection efficacy.</h4>
+</div>
 </div>
 <div class="column-right">
-<p><br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <img src="pics/invPlant.png" width="800px" /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <img src="pics/solidagoProject2019.jpg" width="230px" /></p>
-<p><br /> <br /> <br /> <br /> <br /> <br /> <br /><br />
-<br /> <br /> <br /> <img src="pics/reportsPic2019.png" width="300px" /></p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+<p><img src="pics/sample_phylogeny_first_100.png" width="800px" /></p>
+</div>
+<div class="column-left">
+<hr />
+<div id="quantifying-the-temporal-ecology-of-plant-antagonist-interactions" class="section level2">
+<h2><em>Quantifying the temporal ecology of plant-antagonist interactions</em></h2>
+<div id="for-decades-ecologists-in-western-science-have-studied-how-species-and-their-communities-change-across-time.-time-as-a-unit-of-measurement-and-as-an-axis-of-understanding-the-world-helps-us-model-species-distributions-rates-of-evolution-phenology-and-ontogeny-and-resource-fluctuations.-however-were-still-missing-examples-of-modeling-impact-throughout-time-that-a-evaluate-impact-by-modeling-shorter-time-series-and-b-manipulate-the-nature-timing-and-frequency-of-species-interactions-as-priority-effects-in-community-ecology.-working-with-tall-goldenrod-solidago-altissima-and-its-herbivores-in-common-garden-and-field-experiments-in-southwestern-michigan-at-kellogg-biological-station-i-ask-the-following-questions" class="section level4">
+<h4>For decades, ecologists in Western science have studied how species and their communities change across time. Time as a unit of measurement and as an axis of understanding the world helps us model species distributions, rates of evolution, phenology and ontogeny, and resource fluctuations. However, we’re still missing examples of modeling impact throughout time that: (a) evaluate impact by modeling shorter time series and (b) manipulate the nature, timing, and frequency of species interactions as priority effects in community ecology. Working with tall goldenrod (<em>Solidago altissima</em>) and its herbivores in common garden and field experiments in southwestern Michigan at <a href="http://www.kbs.msu.edu/">Kellogg Biological Station</a>, I ask the following questions:</h4>
+</div>
+<div id="how-do-single-and-multiple-herbivory-events-alter-host-plants-and-subsequent-community-ecology" class="section level4">
+<h4>1. How do single and multiple herbivory events alter host plants and subsequent community ecology?</h4>
+</div>
+<div id="how-can-we-leverage-statistical-models-to-evaluate-the-impact-of-these-interaction-events" class="section level4">
+<h4>2. How can we leverage statistical models to evaluate the impact of these interaction events?</h4>
+</div>
+</div>
+</div>
+<div class="column-right">
+<p><br> <br> <br> <br> <br></p>
+<p><img src="pics/solidagoProject2019.jpg" width="230px" /></p>
+</div>
+<hr />
+<div class="column-left">
+<hr />
+<div id="how-do-we-leverage-field-biologists-quantitative-skills-for-effective-public-communication" class="section level2">
+<h2><em>How do we leverage field biologists’ quantitative skills for effective public communication?</em></h2>
+<div id="while-effective-public-communication-advances-conservation-and-educational-goals-within-and-outside-the-scientific-community-we-have-not-formally-integrated-all-communication-tools-available-to-us.-in-collaboration-the-integrative-ecology-lab-at-temple-university-i-develop-and-share-data-communication-tools-to-leverage-the-quantitative-skills-that-field-biologists-like-ecologists-learn-in-their-professional-training.-we-have-designed-a-framework-and-coding-workflow-using-the-r-statistical-language-and-its-associated-document-generating-language-r-markdown-to-generate-unique-informative-and-customizable-reports-for-public-stakeholders.-these-reports-which-communicate-research-data-potentially-taken-over-dozens-of-locations-can-be-individualized-in-our-workflow-so-that-each-stakeholder-receives-system-specific-information.-our-work-is-currently-in-press-at-frontiers-in-ecology-and-the-environment.-if-youd-like-to-see-our-the-package-repository-and-tutorial-in-the-meantime-check-out-the-c4bi-coding-for-broader-impact-website-here." class="section level4">
+<h4>While effective public communication advances conservation and educational goals within and outside the scientific community, we have not formally integrated all communication tools available to us. In collaboration the <a href="https://www.iecolab.org/">Integrative Ecology Lab</a> at Temple University, I develop and share data communication tools to leverage the quantitative skills that field biologists like ecologists learn in their professional training. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. Our work is currently in press at <em>Frontiers in Ecology and the Environment</em>. If you’d like to see our the package repository and tutorial in the meantime, check out the <code>c4bi</code> (Coding for broader impact) website <a href="https://dbturner.github.io/c4bi">here</a>.</h4>
+</div>
+</div>
+</div>
+<div class="column-right">
+<p><br> <br> <br> <br> <br> <br> <br></p>
+<p><img src="pics/reportsPic2019.png" width="300px" /></p>
+</div>
+<hr />
+<p><br></p>
+<div class="column-left">
+<hr />
+<div id="how-do-insect-communities-assemble-on-non-native-plants" class="section level2">
+<h2><em>How do insect communities assemble on non-native plants?</em></h2>
+<div id="humans-have-distributed-plants-around-the-world-and-in-the-process-we-have-indirectly-initiated-novel-interactions-between-plants-and-insects.-many-non-native-plants-are-successful-colonizers-of-their-new-habitats-yet-they-still-host-native-herbivorous-insects.-while-these-novel-community-interactions-have-been-documented-across-numerous-biological-control-studies-and-invasive-plant-species-investigations-we-have-not-systematically-understood-broad-patterns-about-novel-host-herbivore-interactions-across-plant-species-using-these-data.-with-over-50-plant-species-identified-in-a-meta-analysis-i-use-web-scraping-and-text-analysis-tools-to-quickly-process-and-collect-insect-and-plant-trait-data-from-grey-and-peer-reviewed-literature.-with-this-project-we-wil-performing-a-meta-analysis-to-understand-the-differences-in-herbivore-community-composition-species-diversity-and-trait-diversity-between-a-plants-native-and-novel-ranges.-by-comparing-insect-communities-in-these-two-ranges-we-can-answer-fundamental-questions-about-the-traits-that-predict-how-communities-assembly-on-novel-hosts." class="section level4">
+<h4>Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant’s native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.</h4>
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="column-right">
+<p><br> <br> <br> <br> <br> <br> <br> <br> <br> <img src="pics/invPlant.png" width="800px" /> <br></p>
 </div>
 
 
@@ -361,7 +363,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -379,7 +381,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

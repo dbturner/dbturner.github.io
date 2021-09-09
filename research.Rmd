@@ -5,103 +5,124 @@ title: Research Projects
 <style>
 .column-left{
   float: left;
-  width: 63%;
+  width: 58%;
   text-align: left;
 }
 .column-right{
   float: right;
-  width: 35%;
+  width: 38%;
   text-align: center;
 }
 </style>
 
 ***********************************************************************************  
 <div class="column-left">
-## _How do insect communities assemble on non-native plants?_
-<br />
 
-#### Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant's native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.
-<br />
-<br />
+## _The global distribution of plant terpenes and terpenoids_
 
-***********************************************************************************  
-<br />  
+#### Terpenes and terpenoids represent one of the most diverse classes of secondary metabolites produced by plants. These phytochemicals can repel enemies, attract pollinators, dispersers, and defenders, and communicate to neighboring plants. Despite significant ecological and evolutionary consequences, patterns in terpene and terpenoid abundance and diversity in plants are largely unknown due to widespread variation in growth conditions and chemical compound detection methods. However, with recent advancements in data mining and statistical modeling, we can synthesize known terpene and terpenoid profiles to identify broad patterns like the distribution of terpenoid diversity globally and across plant organs. By uncovering global patterns in terpenoid diversity across the plant phylogeny, we can move closer toward understanding how secondary metabolites, like terpenes and terpenoids, mediate interactions between plants and their communities.
 
-## _How does ontogenetic variation in plant populations affect plant-insect interactions?_
-<br />
+#### However, before we can answer these questions, we must synthesize what we know about plant terpenes and organize in a central location for end users. Alongside a team of biologists, I'm developing collaborative data collection pipelines through R Shiny applications that help us extract data from existing literature about plant terpenes and terpenoids. We then build a cloud-hosted SQL database for access across collaborators and users interested in answering a wide range of questions, from terpene sources of aroma in wine grapes to how lab techniques influence compound detection efficacy.
 
-#### Intraspecific diversity in plant populations has positive effects on insect community diversity. Ontogenetic traits, like the regulation of plant defense, growth, and reproduction, may be a mechanism for the maintenance of diversity in insect communities, yet we have not fully integrated temporal ecology into intraspecific diversity experiments. Using common garden and greenhouse experiments with tall goldenrod (_Solidago altissima_) at [Kellogg Biological Station](http://www.kbs.msu.edu/), I manipulate combinations of genotypes with varying ontogenetic trajectories to observe how interactions varying across goldenrod genotypes over time. Incorporating often overlooked within-season temporal variation explains the patterns that we have observed at a single point in time or as an average across the growing season.
-<br />
-<br />
+</div>
+<div class="column-right">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-***********************************************************************************  
-<br />  
+```{r, echo = FALSE, out.width = "800px"}
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/sample_phylogeny_first_100.png")
+```
+</div>
 
-## _How do we leverage field biologists' quantitative skills for effective public communication?_
-<br />
 
-#### While effective public communication advances conservation and educational goals within and outside the scientific community, we have not formally integrated all communication tools available to us. In collaboration with Drs. Jocelyn Behm and Matthew Helmus from the [Integrative Ecology Lab](https://www.iecolab.org/) at Temple University, I work to develop and share data communication tools to leverage the quantitative skills that field biologists like ecologists learn in their professional training. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. We are publishing this work and code as an article soon. If you'd like to see our the package repository and tutorial in the meantime, check out the `c4bi` (Coding for broader impact) website [here](https://dbturner.github.io/c4bi)!
 
-<br />
-<br />
+<div class="column-left">
 
-***********************************************************************************  
-<br />  
+*************************
 
-## _Why do plants have so many terpene compounds?_
-<br />
+## _Quantifying the temporal ecology of plant-antagonist interactions_
+#### For decades, ecologists in Western science have studied how species and their communities change across time. Time as a unit of measurement and as an axis of understanding the world helps us model species distributions, rates of evolution, phenology and ontogeny, and resource fluctuations. However, we’re still missing examples of modeling impact throughout time that: (a) evaluate impact by modeling shorter time series and (b) manipulate the nature, timing, and frequency of species interactions as priority effects in community ecology. Working with tall goldenrod (_Solidago altissima_) and its herbivores in common garden and field experiments in southwestern Michigan at [Kellogg Biological Station](http://www.kbs.msu.edu/), I ask the following questions:
 
-#### With the advance of large-scale phytochemical datasets, ecologists, evolutionary biologists, and biochemists now have the unique opportunity synthesize individual results into broader patterns about the diversity, abundance, temporal and spatial variation, and evolution of phytochemicals across the plant tree of life. At least three major logistical constraints prevent the scientific community from understanding general patterns in the ecological relevance and evolution of plant secondary metabolites: (1) the reference of scale (e.g., individual, population, species; $\alpha$-, $\beta$-, $\gamma$-diversity); (2) the relationship between phytochemical diversity and abundance; and (3) methodological variation in phytochemical extraction and analysis. A tractable class of secondary metabolites—_terpenes_—presents the opportunity to relate these data to answer broad questions regarding scale, phytochemical diversity-abundance relationships, and methodological heterogeneity. In this project, I am creating a large relational database to answer key hypotheses about the origins and effects of terpene diversity and how this  diversity varies across scales.
-<br />
-<br />
+#### 1. How do single and multiple herbivory events alter host plants and subsequent community ecology?  
+
+#### 2. How can we leverage statistical models to evaluate the impact of these interaction events?
 
 
 </div>
 
 <div class="column-right">
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-```{r, echo = FALSE, out.width = "800px"}
-knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/invPlant.png")
-```
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
 ```{r, echo = FALSE, out.width = "230px"}
 knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/solidagoProject2019.jpg")
 ```
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />  
-<br />
-<br />
-<br />
+</div>
+
+***********************************************************************************  
+<div class="column-left">
+*************************
+
+## _How do we leverage field biologists' quantitative skills for effective public communication?_
+
+#### While effective public communication advances conservation and educational goals within and outside the scientific community, we have not formally integrated all communication tools available to us. In collaboration  the [Integrative Ecology Lab](https://www.iecolab.org/) at Temple University, I  develop and share data communication tools to leverage the quantitative skills that field biologists like ecologists learn in their professional training. We have designed a framework and coding workflow using the R statistical language and its associated document-generating language, R Markdown, to generate unique, informative, and customizable reports for public stakeholders. These reports, which communicate research data potentially taken over dozens of locations, can be individualized in our workflow so that each stakeholder receives system-specific information. Our work is currently in press at _Frontiers in Ecology and the Environment_. If you'd like to see our the package repository and tutorial in the meantime, check out the `c4bi` (Coding for broader impact) website [here](https://dbturner.github.io/c4bi).
+
+</div>
+
+<div class="column-right">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 ```{r, echo = FALSE, out.width = "300px"}
 knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/reportsPic2019.png")
 ```
+
+</div>
+***********************************************************************************  
+<br> 
+
+<div class="column-left">
+************************* 
+
+## _How do insect communities assemble on non-native plants?_
+
+#### Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant's native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.
+
+<br>
+
+</div>
+
+
+<div class="column-right">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+```{r, echo = FALSE, out.width = "800px"}
+knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/invPlant.png")
+```
+<br>
+
 
 </div>
