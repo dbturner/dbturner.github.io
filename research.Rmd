@@ -33,11 +33,13 @@ title: Research Projects
 <br>
 <br>
 <br>
-<br>
 
 ```{r, echo = FALSE, out.width = "800px"}
 knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/sample_phylogeny_first_100.png")
 ```
+
+Phylogeny of plant species represented in a subset of the database.
+
 </div>
 
 
@@ -67,6 +69,7 @@ knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/sample_phylo
 ```{r, echo = FALSE, out.width = "230px"}
 knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/solidagoProject2019.jpg")
 ```
+
 
 </div>
 
