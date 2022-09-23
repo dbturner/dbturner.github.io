@@ -33,18 +33,18 @@ title: About me
 ***********************************************************************************  
 
 <div class="column-left">
-#### I'm a quantitative ecologist studying how time and chemical diversity influence interactions between plants and insects. As a PhD candidate in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I assemble and analyze big ecological datasets and run field experiments in southwestern Michigan.
+#### I'm a quantitative ecologist studying how chemical diversity and time influence interactions between plants and insects. As a PhD candidate in the [Department of Entomology at Michigan State University](https://www.canr.msu.edu/ent/), I deploy novel data science tools to solve some our most fundamental questions about the natural world. Trained on mostly open-source coding materials, I am committed to making technical information more accessible trhough the .
 
 ***********************************************************************************  
+
 #### In the past, I researched Hispaniolan frog and toad phylogenetics and urban ecosystem services in the Philadelphia region. Currently, I focus on four projects:  
 
-##### 1. Engineering a database of terpene diversity in plants. 
+##### 1. Engineering and unlocking insights from a database of terpene diversity in plants
 
-##### 2. Modeling plant-herbivore temporal dynamics in the tall goldenrod (_Solidago altissima_) system    
+##### 2. Modeling plant-herbivore temporal dynamics with empirical data    
 
-##### 3. Integrating ecologists' coding tools into effective stakeholder communication (see below)    
+##### 3. Integrating ecologists' coding tools, communication, and education (see below)    
 
-##### 4. Building a dataset to predict novel plant-insect interactions from dozens of natural history studies.  
 
 ***********************************************************************************  
 

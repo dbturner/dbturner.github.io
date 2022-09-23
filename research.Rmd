@@ -20,14 +20,13 @@ title: Research Projects
 
 ## _The global distribution of plant terpenes and terpenoids_
 
-#### Terpenes and terpenoids represent one of the most diverse classes of secondary metabolites produced by plants. These phytochemicals can repel enemies, attract pollinators, dispersers, and defenders, and communicate to neighboring plants. Despite significant ecological and evolutionary consequences, patterns in terpene and terpenoid abundance and diversity in plants are largely unknown due to widespread variation in growth conditions and chemical compound detection methods. However, with recent advancements in data mining and statistical modeling, we can synthesize known terpene and terpenoid profiles to identify broad patterns like the distribution of terpenoid diversity globally and across plant organs. By uncovering global patterns in terpenoid diversity across the plant phylogeny, we can move closer toward understanding how secondary metabolites, like terpenes and terpenoids, mediate interactions between plants and their communities.
+#### Ubiquitous and the most diverse set of chemical compounds in plants, terpenes and terpenoids, were considered metabolic ‘waste,’ byproducts from the primary processes plants evolved to grow and reproduce. After decades of inscrutability, the proliferation of molecular techniques, like gas chromatograph-mass spectrometry, unveiled a seemingly unending assortment of these compounds and helped identify their synthesis, chemical properties, and functions. Today, we now know terpenoids make forests more flammable, alarm plants of stress, and carry medicinal benefits for humans. 
 
-#### However, before we can answer these questions, we must synthesize what we know about plant terpenes and organize in a central location for end users. Alongside a team of biologists, I'm developing collaborative data collection pipelines through R Shiny applications that help us extract data from existing literature about plant terpenes and terpenoids. We then build a cloud-hosted SQL database for access across collaborators and users interested in answering a wide range of questions, from terpene sources of aroma in wine grapes to how lab techniques influence compound detection efficacy.
+#### Despite these advances, we know very little about the macroecology and evolution of terpenes and terpenoids. Most studies to date focus on a few compounds of economic or ecological importance, yet authors often publish an entire profile of all compounds identified in the study. These chemical profiles have remained inaccessible due to data engineering limitations. Rather than treat each study in isolation, we can reconstruct existing knowledge into a comprehensive and standardized database. From there, we can identify hotspots of terpene diversity across the plant kingdom, compare diversity in tissue from different organs like fruits and leaves, and evaluate the effects of agricultural domestication.
+
 
 </div>
 <div class="column-right">
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -99,33 +98,6 @@ knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/reportsPic20
 </div>
 ***********************************************************************************  
 <br> 
-
-<div class="column-left">
-************************* 
-
-## _How do insect communities assemble on non-native plants?_
-
-#### Humans have distributed plants around the world, and in the process, we have indirectly initiated novel interactions between plants and insects. Many non-native plants are successful colonizers of their new habitats, yet they still host native herbivorous insects. While these novel community interactions have been documented across numerous biological control studies and invasive plant species investigations, we have not systematically understood broad patterns about novel host-herbivore interactions across plant species using these data. With over 50 plant species identified in a meta-analysis, I use web scraping and text analysis tools to quickly process and collect insect and plant trait data from grey and peer-reviewed literature. With this project, we wil performing a meta-analysis to understand the differences in herbivore community composition, species diversity, and trait diversity between a plant's native and novel ranges. By comparing insect communities in these two ranges, we can answer fundamental questions about the traits that predict how communities assembly on novel hosts.
-
-<br>
-
-</div>
-
-
-<div class="column-right">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-```{r, echo = FALSE, out.width = "800px"}
-knitr::include_graphics("~/Documents/GitHub/dbturner.github.io/pics/invPlant.png")
-```
-<br>
 
 
 </div>
