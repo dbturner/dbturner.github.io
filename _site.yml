@@ -5,12 +5,12 @@ navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "Research"
-      href: research.html
-    - text: "Publications"
-      href: publications.html
-    - text: "Blog"  
-      href: https://dbturner.github.io/blog
+    # - text: "Research"
+    #   href: research.html
+    # - text: "Publications"
+    #   href: publications.html
+    # - text: "Blog"  
+    #   href: https://dbturner.github.io/blog
 
 output:
   rmarkdown::html_document:

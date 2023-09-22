@@ -1,5 +1,5 @@
 getwd()
-setwd("~/Documents/GitHub/dbturner.github.io")
+setwd("~/Documents/github/dbturner.github.io")
 
 library(rmarkdown)
 rmarkdown::render_site()

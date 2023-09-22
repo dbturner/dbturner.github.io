@@ -11,9 +11,9 @@
 
 
 
-<title>About me</title>
+<title>index.knit</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
@@ -32,14 +32,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171127410-1"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PVDMZQJ74B"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-171127410-1');
+  gtag('config', 'G-PVDMZQJ74B');
 </script>
 
 <style type="text/css">
@@ -69,6 +69,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -89,6 +90,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -146,11 +150,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -179,8 +187,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -188,16 +196,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -241,7 +242,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -256,15 +257,6 @@ $(document).ready(function () {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="research.html">Research</a>
-</li>
-<li>
-  <a href="publications.html">Publications</a>
-</li>
-<li>
-  <a href="https://dbturner.github.io/blog">Posts and Other Resources</a>
-</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -274,7 +266,6 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">About me</h1>
 
 </div>
 
@@ -305,86 +296,13 @@ $(document).ready(function () {
 }
 </style>
 <hr />
-<div class="column-left">
 <div
-id="im-a-quantitative-biologist-studying-how-chemical-diversity-and-time-influence-ecological-interactions.-as-a-phd-candidate-in-the-department-of-entomology-at-michigan-state-university-i-deploy-novel-data-tools-to-solve-some-our-most-fundamental-questions-about-the-natural-world.-trained-on-mostly-open-source-coding-materials-i-am-committed-to-making-technical-information-more-accessible-to-broad-audiences."
+id="hey-this-site-is-currently-under-construction.-please-check-back-later-for-more-info-in-the-meantime-you-can-catch-me-on-linkedin-here."
 class="section level4">
-<h4>I’m a quantitative biologist studying how chemical diversity and
-time influence ecological interactions. As a PhD candidate in the <a
-href="https://www.canr.msu.edu/ent/">Department of Entomology at
-Michigan State University</a>, I deploy novel data tools to solve some
-our most fundamental questions about the natural world. Trained on
-mostly open-source coding materials, I am committed to making technical
-information more accessible to broad audiences.</h4>
+<h4>Hey! This site is currently under construction. Please check back
+later for more info! In the meantime, you can catch me on LinkedIn <a
+href="https://www.linkedin.com/in/daniel-b-turner/">here</a>.</h4>
 <hr />
-</div>
-<div id="currently-i-focus-on-three-projects" class="section level4">
-<h4>Currently, I focus on three projects:</h4>
-<div
-id="curating-and-unlocking-insights-from-a-database-of-terpene-diversity-in-plants"
-class="section level5">
-<h5>1. Curating and unlocking insights from a database of terpene
-diversity in plants</h5>
-</div>
-<div id="modeling-plant-herbivore-temporal-dynamics-with-empirical-data"
-class="section level5">
-<h5>2. Modeling plant-herbivore temporal dynamics with empirical
-data</h5>
-</div>
-<div
-id="integrating-ecologists-coding-tools-communication-and-education-see-below"
-class="section level5">
-<h5>3. Integrating ecologists’ coding tools, communication, and
-education (see below)</h5>
-<hr />
-</div>
-</div>
-<div
-id="ecologists-today-know-how-to-code.-traditionally-in-the-ecological-community-coding-has-been-limited-to-sharing-data-with-other-ecologists.-however-coding-can-accomplish-so-much-more-if-ecologists-employ-this-tool-more-broadly-to-other-audiences.-for-that-reason-i-develop-tools-for-field-biologists-to-communicate-their-research-with-public-audiences-by-leveraging-the-quantitative-skills-used-for-data-analysis-and-publication."
-class="section level4">
-<h4>Ecologists today know how to code. Traditionally in the ecological
-community, coding has been limited to sharing data with other
-ecologists. However, coding can accomplish so much more if ecologists
-employ this tool more broadly to other audiences. For that reason, I
-develop tools for field biologists to communicate their research with
-public audiences by leveraging the quantitative skills used for data
-analysis and publication.</h4>
-</div>
-<div
-id="these-tools-called-c4bi-coding-for-broader-impact-are-created-in-collaboration-with-the-integrative-ecology-lab-at-temple-university.-our-publication-on-the-framework-and-programming-workflow-outlined-in-this-project-is-in-press-at-frontiers-in-ecology-and-the-environment-and-we-are-excited-to-share-it-with-the-ecological-community-and-other-scientists-who-code-and-work-with-many-stakeholders."
-class="section level4">
-<h4>These tools, called <a
-href="https://dbturner.github.io/c4bi"><code>c4bi</code> (Coding for
-broader impact)</a>, are created in collaboration with the <a
-href="https://www.iecolab.org/">Integrative Ecology Lab at Temple
-University</a>. Our publication on the framework and programming
-workflow outlined in this project is in press at <em>Frontiers in
-Ecology and the Environment</em>, and we are excited to share it with
-the ecological community and other scientists who code and work with
-many stakeholders.</h4>
-<hr />
-</div>
-<div
-id="want-to-know-more-about-what-ive-done-in-the-past-check-out-my-cv"
-class="section level4">
-<h4>Want to know more about what I’ve done in the past? Check out my <a
-href="https://dbturner.github.io/cv/cv.html">CV</a>!</h4>
-</div>
-</div>
-<p><br /> <br /></p>
-<div class="column-right">
-<p><img src="pics/homepage_pic2.png" width="280px" />
-<br /></p>
-<p><a
-href="https://scholar.google.com/citations?hl=en&amp;user=K5aIPOwAAAAJ"><img
-src="pics/googlescholarLogo.png"
-id="id" class="class" style="width:14.0%;height:21.0%"
-alt="google scholar" /></a> <a href="https://github.com/dbturner"><img
-src="pics/githubLogo.png" id="id"
-class="class" style="width:14.0%;height:21.0%" alt="github" /></a></p>
-<div id="contact-turne400-at-msu.edu" class="section level4">
-<h4>Contact: turne400 (at) msu.edu</h4>
-</div>
 </div>
 
 
